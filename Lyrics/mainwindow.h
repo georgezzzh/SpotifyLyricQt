@@ -3,8 +3,10 @@
 
 #include <QMainWindow>
 #include <QList>
+
 #include "spotify.h"
 #include "client.h"
+#include "settings.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,16 +27,22 @@ public:
     ~MainWindow();
     //根据时间重新调整歌词的锚点
     void resetLyricDisplay();
+    void configInit();
 private:
     Ui::MainWindow *ui;
+    Settings* set;
+    SetStruct* setStruct;
     Spotify * sp;
     Client* client;
-    QString songFlag; //保存歌曲名
+    //保存歌曲名
+    QString songFlag;
     //把歌词存在list中
     QList<lyricPhrase> list;
     int songBeginTime;
     //用于anchor，滚动所用
     int lastIndex;
+    //检测鼠标是否滚动
+    bool wheelScroll;
 public slots:
     //获取到歌词,调用的槽函数
     void dealLyricSlot(QString lyric);

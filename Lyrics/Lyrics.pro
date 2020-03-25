@@ -1,6 +1,5 @@
 QT       += core gui
 QT       += network
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 LIBS += -luser32
@@ -22,17 +21,27 @@ SOURCES += \
     client.cpp \
     main.cpp \
     mainwindow.cpp \
+    mylabel.cpp \
+    mytextbrowser.cpp \
+    settings.cpp \
     spotify.cpp
 
 HEADERS += \
     client.h \
     mainwindow.h \
+    mylabel.h \
+    mytextbrowser.h \
+    settings.h \
     spotify.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    settings.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resource/resource.qrc

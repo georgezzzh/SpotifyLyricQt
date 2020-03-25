@@ -1,5 +1,4 @@
 #include "client.h"
-
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QUrl>
@@ -10,8 +9,9 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QtDebug>
-#include  <QStandardPaths>
+#include <QStandardPaths>
 #include <QDir>
+
 
 #define cout qDebug().noquote()<<"["<<__FILE__<<":"<<__LINE__<<"]: "
 
@@ -92,15 +92,16 @@ void Client::lyricsSlot(QNetworkReply* reply)
     QString lyric = parseSongLyrics(str);
     //进行缓冲
     QString lyricFilePath = appDataPath+"/"+this->songTitle+".txt";
-    QFile lyricFile(lyricFilePath);
-    if(lyricFile.exists()){
-        lyricFile.remove();
+    if(lyric != ""){
+        QFile lyricFile(lyricFilePath);
+        if(lyricFile.exists()){
+            lyricFile.remove();
+        }
+        if(lyricFile.open(QIODevice::WriteOnly)){
+            lyricFile.write(lyric.toUtf8());
+        }
+        lyricFile.close();
     }
-    if(lyricFile.open(QIODevice::WriteOnly)){
-        lyricFile.write(lyric.toUtf8());
-    }
-    lyricFile.close();
-    cout << "lyrics:\n"<< lyric;
     cout<<this->songTitle<<",本地无缓冲,网络请求";
     //发送歌词信号
     emit sendLyricSignal(lyric);

@@ -23,7 +23,21 @@
      </widget>
     </item>
     <item>
-     <widget class="QTextBrowser" name="lyricLabel"/>
+     <widget class="MyTextBrowser" name="lyricLabel"/>
+    </item>
+    <item>
+     <widget class="QSlider" name="horizontalSlider">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="currentTimeLabel">
+      <property name="text">
+       <string>00:00</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -36,9 +50,46 @@
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>选项</string>
+    </property>
+    <addaction name="actionSettings"/>
+    <addaction name="actionExport"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>关于</string>
+    </property>
+    <addaction name="actionAboutThis"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSettings">
+   <property name="text">
+    <string>设置</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="text">
+    <string>导出歌词</string>
+   </property>
+  </action>
+  <action name="actionAboutThis">
+   <property name="text">
+    <string>关于本项目</string>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyTextBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header location="global">mytextbrowser.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
