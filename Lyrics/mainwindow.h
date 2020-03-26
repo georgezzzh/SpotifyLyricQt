@@ -3,11 +3,10 @@
 
 #include <QMainWindow>
 #include <QList>
-
+#include <QTranslator>
 #include "spotify.h"
 #include "client.h"
 #include "settings.h"
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -30,6 +29,7 @@ public:
     void configInit();
 private:
     Ui::MainWindow *ui;
+    QTranslator* trans;
     Settings* set;
     SetStruct* setStruct;
     Spotify * sp;

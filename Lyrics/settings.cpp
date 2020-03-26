@@ -16,20 +16,14 @@ Settings::Settings(SetStruct* setStruct,QWidget *parent) : QWidget(parent),ui(ne
     this->setWindowTitle("Settings");
     this->setAutoFillBackground(true);//必须有这条语句
     this->setStruct = setStruct;
-    ui->lineEditFontSize->setText(this->setStruct->fontSize);
-    ui->comboBoxLang->setCurrentText(this->setStruct->lang);
-    ui->fontComboBox->setCurrentText(this->setStruct->fontFamily);
-    if(setStruct->bgColor=="dark"){
-        this->setPalette(QPalette(QColor(34,34,34)));
-        ui->comboBoxColor->setCurrentIndex(0);
-    }else{
-        this->setPalette(QPalette(QColor(255,255,255)));
-        ui->comboBoxColor->setCurrentIndex(1);
-    }
+    this->trans = new QTranslator(this);
+    qApp->installTranslator(trans);
     ui->lineEditFontSize->setStyleSheet("QLineEdit{font:black;}");
     ui->fontComboBox->setStyleSheet("QFontComboBox{font:black;}");
     ui->comboBoxLang->setStyleSheet("QFontComboBox{font:black;}");
     ui->comboBoxColor->setStyleSheet("QFontComboBox{font:black;}");
+    //将config.json的内容写入Combox中
+    resetCombox();
     this->changeTextBrowser();
     //信号与槽
     connect(ui->labelFont,&MyLabel::clicked,[=](){
@@ -44,7 +38,6 @@ Settings::Settings(SetStruct* setStruct,QWidget *parent) : QWidget(parent),ui(ne
     //更新字体展示
     connect(ui->lineEditFontSize,SIGNAL(textChanged(QString)),this,SLOT(dealFontSize(QString)));
     connect(ui->fontComboBox,SIGNAL(currentFontChanged(QFont)),this,SLOT(dealFontFamily(QFont)));
-
     //json配置文件
     initConfigFile();
 }
@@ -57,7 +50,19 @@ void Settings::initConfigFile()
         appDir.mkdir(appDataPath);
     }
     this->configName = appDataPath +"/config.json";
-
+}
+void Settings::resetCombox()
+{
+    ui->lineEditFontSize->setText(this->setStruct->fontSize);
+    ui->comboBoxLang->setCurrentText(this->setStruct->lang);
+    ui->fontComboBox->setCurrentText(this->setStruct->fontFamily);
+    if(setStruct->bgColor=="dark"){
+        this->setPalette(QPalette(QColor(34,34,34)));
+        ui->comboBoxColor->setCurrentIndex(0);
+    }else{
+        this->setPalette(QPalette(QColor(255,255,255)));
+        ui->comboBoxColor->setCurrentIndex(1);
+    }
 }
 void Settings::changeTextBrowser()
 {
@@ -107,7 +112,16 @@ void Settings::dealFontSize(QString str)
 
 void Settings::on_comboBoxLang_currentIndexChanged(const QString &arg1)
 {
+    if(arg1 == "简体中文"){
+        cout<<"修改为中文";
+        trans->load("tr/Translation_CN.qm");
+    }else if(arg1 == "English"){
+        trans->load("tr/Translation_EN.qm");
+    }
+    ui->retranslateUi(this);
     changeTextBrowser();
+    //重新写入输入框内容
+    resetCombox();
 }
 
 void Settings::on_comboBoxColor_currentIndexChanged(int index)

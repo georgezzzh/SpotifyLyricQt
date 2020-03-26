@@ -12,8 +12,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonParseError>
-
-//一开始程序崩溃的原因:应该是在非mainwindow.cpp修改了UI了,指定父对象为this
+#include <QTranslator>
 
 #define cout qDebug().noquote()<<"["<<__FILE__<<":"<<__LINE__<<"]: "
 
@@ -22,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //加载翻译文件
+    this->trans = new QTranslator(this);
+    qApp->installTranslator(trans);
     //进度条
     QString sss="QSlider::add-page:Horizontal{background-color: rgb(87, 97, 106);height:4px;}";
     sss += "QSlider::sub-page:Horizontal{height:4px;background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(231,80,229, 255), stop:1 rgba(7,208,255, 255));}";
@@ -54,14 +56,14 @@ MainWindow::MainWindow(QWidget *parent)
        }
        cout<<"滑动进度条, value:"<<val;
     });
-    //菜单栏设置
+    //歌词显示设置
     ui->lyricLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->title->setAlignment(Qt::AlignCenter);
+    ui->menubar->setStyleSheet("QMenubar{font-color:black;}");
     this->wheelScroll = false;
     //设置配置
     this->setStruct = new SetStruct();
     configInit();
-    ui->menubar->setStyleSheet("QMenubar{font-color:black;}");
     set = new Settings(this->setStruct);
     connect(this->set,&Settings::setChangeSignal,this,[=](){
         //更新保存的设置配置
@@ -72,7 +74,12 @@ MainWindow::MainWindow(QWidget *parent)
         set->show();
     });
     connect(ui->actionAboutThis,&QAction::triggered,[=](){
-        QMessageBox::about(this,"About","Spotify曲词同步工具, Based on QT<br/><a href='https://github.com/georgezzzh/SpotifyLyricQT'>源代码</a>");
+        QString msg;
+        if(setStruct->lang=="简体中文")
+            msg ="Spotify曲词同步工具, Based on QT<br/><a href='https://github.com/georgezzzh/SpotifyLyricQT'>源代码</a>";
+        else
+            msg ="Spotify synchronization software of song and lyric<br/><a href='https://github.com/georgezzzh/SpotifyLyricQT'>source code</a>";
+        QMessageBox::about(this,"About",msg);
     });
     connect(ui->actionExport,&QAction::triggered,[=](){
         QString deskPath = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
@@ -107,7 +114,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(client,SIGNAL(sendLyricSignal(QString)),this,SLOT(dealLyricSlot(QString)));
     //绑定鼠标滚轮滚动
     connect(ui->lyricLabel,&MyTextBrowser::myWhellScroll,this,[=](){
-        cout<<"收到鼠标中键滚动信号";
         this->wheelScroll = true;
     });
 }
@@ -115,6 +121,10 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete trans;
+    delete set;
+    delete setStruct;
+    delete client;
 }
 
 void MainWindow::resetLyricDisplay()
@@ -228,20 +238,22 @@ void MainWindow::configInit()
     QDir dir(dirPath);
     QFile setFile;
     setFile.setFileName(dirPath+"/config.json");
-    if(!dir.exists() || !setFile.exists() || !setFile.open(QIODevice::ReadOnly)){
-        return;
+    if(!dir.exists()){
+        dir.mkdir(dirPath);
     }
-    QJsonDocument document = QJsonDocument::fromJson(setFile.readAll(),&jsonError);
-    if(document.isNull() || jsonError.error != QJsonParseError::NoError)
-        return ;
-    QString bgColor = document.object().value("bgColor").toString();
-    QString fontFamily = document.object().value("fontFamily").toString();
-    QString fontSize = document.object().value("fontSize").toString();
-    QString lang = document.object().value("lang").toString();
-    if(bgColor!="") this->setStruct->bgColor = bgColor;
-    if(fontFamily!="") this->setStruct->fontFamily = fontFamily;
-    if(fontSize!="") this->setStruct->fontSize = fontSize;
-    if(lang!="") this->setStruct->lang = lang;
+    if(!setFile.exists()){
+        this->setStruct->setAttributes("dark","","20","");
+    }else{
+        if(!setFile.open(QIODevice::ReadOnly)) return;
+        QJsonDocument document = QJsonDocument::fromJson(setFile.readAll(),&jsonError);
+        setFile.close();
+        if(document.isNull() || jsonError.error != QJsonParseError::NoError) return ;
+        QString bgColor = document.object().value("bgColor").toString();
+        QString fontFamily = document.object().value("fontFamily").toString();
+        QString fontSize = document.object().value("fontSize").toString();
+        QString lang = document.object().value("lang").toString();
+        this->setStruct->setAttributes(bgColor,fontFamily,fontSize,lang);
+    }
     //改变背景颜色
     //dark mode
     this->setAutoFillBackground(true);//必须有这条语句
@@ -253,6 +265,14 @@ void MainWindow::configInit()
         this->setPalette(QPalette(QColor(255,255,255)));
         ui->lyricLabel->setStyleSheet("QTextBrowser{background-color:#ffffff;border-radius:8px;"+fontSizeStyle+"}");
     }
-
+    //修改语言
+    QLocale local;
+    if(setStruct->lang == "简体中文"||local.language()==QLocale::Chinese){
+        trans->load("tr/Translation_CN.qm");
+    }else{
+        trans->load("tr/Translation_EN.qm");
+    }
+    ui->retranslateUi(this);
+    //重新写入title
+    ui->title->setText(this->songFlag);
 }
-

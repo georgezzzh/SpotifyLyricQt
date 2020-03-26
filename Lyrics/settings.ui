@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>578</width>
-    <height>414</height>
+    <width>579</width>
+    <height>436</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,7 +26,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -48,7 +48,7 @@
              </size>
             </property>
             <property name="text">
-             <string>15</string>
+             <string>20</string>
             </property>
            </widget>
           </item>
@@ -119,11 +119,6 @@ p, li { white-space: pre-wrap; }
              <string>English</string>
             </property>
            </item>
-           <item>
-            <property name="text">
-             <string>繁體中文</string>
-            </property>
-           </item>
           </widget>
          </item>
         </layout>
@@ -173,7 +168,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>10</x>
      <y>50</y>
-     <width>81</width>
+     <width>111</width>
      <height>301</height>
     </rect>
    </property>
@@ -186,9 +181,9 @@ p, li { white-space: pre-wrap; }
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>30</y>
-      <width>41</width>
+      <width>91</width>
       <height>151</height>
      </rect>
     </property>
@@ -196,7 +191,7 @@ p, li { white-space: pre-wrap; }
      <item>
       <widget class="MyLabel" name="labelFont">
        <property name="text">
-        <string>字体</string>
+        <string>显示</string>
        </property>
       </widget>
      </item>
@@ -234,7 +229,7 @@ p, li { white-space: pre-wrap; }
   <widget class="Line" name="line_3">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>120</x>
      <y>20</y>
      <width>20</width>
      <height>371</height>
