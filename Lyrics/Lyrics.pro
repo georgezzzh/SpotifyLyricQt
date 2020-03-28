@@ -20,6 +20,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     client.cpp \
+    desklyric.cpp \
     main.cpp \
     mainwindow.cpp \
     mylabel.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 
 HEADERS += \
     client.h \
+    desklyric.h \
     mainwindow.h \
     mylabel.h \
     mytextbrowser.h \

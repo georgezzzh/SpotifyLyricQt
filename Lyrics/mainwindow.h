@@ -7,6 +7,8 @@
 #include "spotify.h"
 #include "client.h"
 #include "settings.h"
+#include "desklyric.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -34,6 +36,7 @@ private:
     SetStruct* setStruct;
     Spotify * sp;
     Client* client;
+    DeskLyric* deskLyric;
     //保存歌曲名
     QString songFlag;
     //把歌词存在list中

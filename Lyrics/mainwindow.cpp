@@ -116,6 +116,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->lyricLabel,&MyTextBrowser::myWhellScroll,this,[=](){
         this->wheelScroll = true;
     });
+    //桌面歌词
+    this->deskLyric = new DeskLyric();
+    this->deskLyric->show();
 }
 
 MainWindow::~MainWindow()
@@ -155,6 +158,14 @@ void MainWindow::resetLyricDisplay()
                 text = text+"<h3><font color='green'>"+list[i].lyric+"</font></h3>";
                 list[i].highLight = true;
                 lastIndexUpdate = i;
+                //设置桌面歌词,持续时间
+                this->deskLyric->setLyricText(list[i].lyric);
+                if(i+1<list.size()){
+                    deskLyric->setDuration(list[i+1].time-list[i].time);
+                }else{
+                    deskLyric->setDuration(2);
+                }
+                deskLyric->update();
             }else{
                 text = text+"<p"+fontColorStyle+"><font"+fontColorStyle+">"+list[i].lyric+"</font><p>";
             }
