@@ -13,6 +13,8 @@
 #include <QJsonDocument>
 #include <QJsonParseError>
 #include <QTranslator>
+#include "neteasecloudmusicclient.h"
+#include "qqmusicclient.h"
 
 #define cout qDebug().noquote()<<"["<<__FILE__<<":"<<__LINE__<<"]: "
 
@@ -21,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_QuitOnClose,true);
     //加载翻译文件
     this->trans = new QTranslator(this);
     qApp->installTranslator(trans);
@@ -61,13 +64,19 @@ MainWindow::MainWindow(QWidget *parent)
     ui->title->setAlignment(Qt::AlignCenter);
     ui->menubar->setStyleSheet("QMenubar{font-color:black;}");
     this->wheelScroll = false;
+
+    //桌面歌词
+    this->deskLyric = new DeskLyric();
     //设置配置
     this->setStruct = new SetStruct();
-    configInit();
+    //Setting函数初始化setStruct
     set = new Settings(this->setStruct);
+    //读取setStruct内容,langInit初始化语言,configChange加载其他设置
+    langInit();
+    configChange();
     connect(this->set,&Settings::setChangeSignal,this,[=](){
         //更新保存的设置配置
-        configInit();
+        configChange();
     });
     connect(ui->actionSettings,&QAction::triggered,[=](){
         set->setWindowModality(Qt::WindowModality::ApplicationModal);
@@ -101,6 +110,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(sp,SIGNAL(threadOver(QString)),this,SLOT(dealSongName(QString)));
     //关闭函数时,线程退出
     connect(this,&MainWindow::destroyed,this,[=](){
+
        if(sp->isRunning()){
            sp->setRunning(false);
            sp->exit(0);
@@ -110,15 +120,15 @@ MainWindow::MainWindow(QWidget *parent)
     });
     sp->start();
     //绑定槽函数
-    client = new Client(this);
-    connect(client,SIGNAL(sendLyricSignal(QString)),this,SLOT(dealLyricSlot(QString)));
+    neteaseClient = new NeteaseCloudMusicClient(this);
+    qqClient = new QQMusicClient(this);
+    client = qqClient;
+    connect(qqClient,SIGNAL(sendLyricSignal(QString)),this,SLOT(dealLyricSlot(QString)));
+    connect(neteaseClient,SIGNAL(sendLyricSignal(QString)),this,SLOT(dealLyricSlot(QString)));
     //绑定鼠标滚轮滚动
     connect(ui->lyricLabel,&MyTextBrowser::myWhellScroll,this,[=](){
         this->wheelScroll = true;
     });
-    //桌面歌词
-    this->deskLyric = new DeskLyric();
-    this->deskLyric->show();
 }
 
 MainWindow::~MainWindow()
@@ -128,12 +138,12 @@ MainWindow::~MainWindow()
     delete set;
     delete setStruct;
     delete client;
+    delete deskLyric;
 }
 
 void MainWindow::resetLyricDisplay()
 {
     if(this->list.size()<1){
-        ui->lyricLabel->setText("Unknown Error");
         return;
     }
     int now = QDateTime::currentDateTime().toMSecsSinceEpoch();
@@ -208,6 +218,8 @@ void MainWindow::dealSongName(QString songName)
         int timeStamp=QDateTime::currentDateTime().toMSecsSinceEpoch();
         this->songBeginTime = timeStamp;
         this->lastIndex =0;
+        this->switchClient = false;
+        this->client = qqClient;
         songFlag = songName;
         ui->title->setText(songName);
         client->setSongTitle(songName);
@@ -218,7 +230,24 @@ void MainWindow::dealSongName(QString songName)
 void MainWindow::dealLyricSlot(QString lyric)
 {
     if(lyric == ""){
-        ui->lyricLabel->setText("服务端未查询到该歌词");
+        //切换客户端,再次查询
+        if(!switchClient){
+            switchClient = true;
+            if(client == this->qqClient){
+                client = neteaseClient;
+                client->sendHttpRequest(songFlag);
+            }else{
+                client = this->qqClient;
+                client->sendHttpRequest(songFlag);
+            }
+        }else{
+            this->list.clear();
+            ui->lyricLabel->setText(tr("服务端未查到该歌词或其他未知错误"));
+            cout << "未查询到歌词，已清空列表";
+            this->deskLyric->setLyricText("...");
+            this->deskLyric->update();
+        }
+        cout<<"接收到的歌词为空";
     }else{
         lyric +="\n";
         lyric.replace(QRegExp("[\r]"),"");
@@ -242,29 +271,8 @@ void MainWindow::dealLyricSlot(QString lyric)
     }
 }
 
-void MainWindow::configInit()
+void MainWindow::configChange()
 {
-    QJsonParseError jsonError;
-    QString dirPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    QDir dir(dirPath);
-    QFile setFile;
-    setFile.setFileName(dirPath+"/config.json");
-    if(!dir.exists()){
-        dir.mkdir(dirPath);
-    }
-    if(!setFile.exists()){
-        this->setStruct->setAttributes("dark","","20","");
-    }else{
-        if(!setFile.open(QIODevice::ReadOnly)) return;
-        QJsonDocument document = QJsonDocument::fromJson(setFile.readAll(),&jsonError);
-        setFile.close();
-        if(document.isNull() || jsonError.error != QJsonParseError::NoError) return ;
-        QString bgColor = document.object().value("bgColor").toString();
-        QString fontFamily = document.object().value("fontFamily").toString();
-        QString fontSize = document.object().value("fontSize").toString();
-        QString lang = document.object().value("lang").toString();
-        this->setStruct->setAttributes(bgColor,fontFamily,fontSize,lang);
-    }
     //改变背景颜色
     //dark mode
     this->setAutoFillBackground(true);//必须有这条语句
@@ -276,14 +284,25 @@ void MainWindow::configInit()
         this->setPalette(QPalette(QColor(255,255,255)));
         ui->lyricLabel->setStyleSheet("QTextBrowser{background-color:#ffffff;border-radius:8px;"+fontSizeStyle+"}");
     }
-    //修改语言
+    //重新写入title
+    ui->title->setText(this->songFlag);
+    if(setStruct->deskLrcOri=="VERTICAL"){
+        this->deskLyric->setOrientation(Oritention::VERTICAL);
+    }else{
+        this->deskLyric->setOrientation(Oritention::HORIZONTAL);
+    }
+    if(setStruct->deskLrcStatus == "off")
+        this->deskLyric->hide();
+    else
+        this->deskLyric->show();
+}
+void MainWindow::langInit()
+{
     QLocale local;
-    if(setStruct->lang == "简体中文"||local.language()==QLocale::Chinese){
+    if(setStruct->lang == "简体中文"||(setStruct->lang=="" && local.language()==QLocale::Chinese)){
         trans->load("tr/Translation_CN.qm");
     }else{
         trans->load("tr/Translation_EN.qm");
+        ui->retranslateUi(this);
     }
-    ui->retranslateUi(this);
-    //重新写入title
-    ui->title->setText(this->songFlag);
 }

@@ -2,7 +2,7 @@
 #define DESKLYRIC_H
 
 #include <QWidget>
-
+enum Oritention{HORIZONTAL,VERTICAL};
 class DeskLyric : public QWidget
 {
     Q_OBJECT
@@ -10,6 +10,7 @@ public:
     explicit DeskLyric(QWidget *parent = nullptr);
     void setLyricText(QString text);
     void setDuration(double duration);
+    void setOrientation(Oritention ori){this->orientation = ori;}
 protected:
     void paintEvent(QPaintEvent *) override;
     void mouseMoveEvent(QMouseEvent* ev) override;
@@ -25,7 +26,7 @@ private:
     //用于鼠标拖动
     QPoint p;
     //用于显示横屏还是竖屏模式
-    QString orientation;
+    Oritention orientation;
     QString text ;
 signals:
 

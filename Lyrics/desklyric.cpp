@@ -11,30 +11,17 @@
 #define cout qDebug().noquote()<<"["<<__FILE__<<":"<<__LINE__<<"]: "
 void DeskLyric::setLyricText(QString text)
 {
-    if(text == ""){
-        this->text ="...";
-    }else{
-        this->text = text;
-    }
+    this->text = (text=="") ? "..." : text;
 }
 
 DeskLyric::DeskLyric(QWidget *parent) : QWidget(parent)
 {
     //去掉右下角三角形,在statusBar把setGridSize的enable属性点击为false即可
-    //setMouseTracking(true);
+    this->setAttribute(Qt::WA_QuitOnClose,false);
+    this->orientation=Oritention::HORIZONTAL;
     //设置成无边框,并始终在最上方
-    //获取屏幕的长度与宽度
-    int deskwidth=QApplication::desktop()->width();
-    int deskheight=QApplication::desktop()->height();
-    this->orientation="vertical";
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-    if(orientation=="horizontal"){
-        //函数四个参数: x y w h
-        setGeometry(100,deskheight-200,deskwidth-200,60);
-    }else{
-        setGeometry(100,200,60,deskheight-200);
-    }
-    this->setWindowTitle("lyricFlot");
+    this->setWindowTitle("desktop lyric");
     this->setAttribute(Qt::WA_TranslucentBackground);
     this->setCursor(Qt::OpenHandCursor);
     this->lyricWidth = 0;
@@ -46,7 +33,6 @@ DeskLyric::DeskLyric(QWidget *parent) : QWidget(parent)
         this->update();
     });
     timer->start();
-
 }
 void DeskLyric::setDuration(double duration)
 {
@@ -56,7 +42,7 @@ void DeskLyric::setDuration(double duration)
     QPainter painter;
     if(duration!=0){
         this->step = lineWidth/(this->duration/0.07);
-        cout<<"texLen:"<<lineWidth<<"duration:"<<duration<<",step:"<<step;
+        //cout<<"texLen:"<<lineWidth<<"duration:"<<duration<<",step:"<<step;
     }
     else
         this->step = 100;
@@ -70,10 +56,17 @@ void DeskLyric::mousePressEvent(QMouseEvent *ev)
 }
 void DeskLyric::mouseMoveEvent(QMouseEvent *ev)
 {
-    cout <<"mouse Move事件";
     this->move(ev->globalPos()-p);
 }
 void DeskLyric::paintEvent(QPaintEvent *){
+    int deskwidth=QApplication::desktop()->width();
+    int deskheight=QApplication::desktop()->height();
+    if(orientation==Oritention::HORIZONTAL){
+        //函数四个参数: x y w h
+        setGeometry(100,deskheight-200,deskwidth-200,60);
+    }else{
+        setGeometry(100,200,60,deskheight-200);
+    }
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
     QFont font("Times",30,QFont::Bold);
@@ -94,7 +87,7 @@ void DeskLyric::paintEvent(QPaintEvent *){
     //为了纵向而修改
     //保存横屏或者纵屏幕最高宽度
     int lineMaxLen;
-    if(orientation=="horizontal"){
+    if(orientation==Oritention::HORIZONTAL){
         lineMaxLen = this->width();
     }else{
         lineMaxLen = this->height();
@@ -104,21 +97,24 @@ void DeskLyric::paintEvent(QPaintEvent *){
     int charLen = painter.fontMetrics().horizontalAdvance("字");
     int lyricLen = painter.fontMetrics().horizontalAdvance(dispText);
     //整句歌词的长度
-    lineWidth = painter.fontMetrics().horizontalAdvance(text);
+    int len = painter.fontMetrics().horizontalAdvance(text);
+    if(len>100){
+        lineWidth = painter.fontMetrics().horizontalAdvance(text);
+    }
     if(lyricLen > lineMaxLen && lyricWidth < lineMaxLen ){
          int len = lineMaxLen/charLen;
          dispText = dispText.left(len);
-         cout<<"截取前半部分,"<<dispText;
+         //cout<<"截取前半部分,"<<dispText;
     }
     int passInt = lyricWidth/charLen;
     if(lyricLen > lineMaxLen && lyricWidth > lineMaxLen){
         dispText = text.mid(passInt);
         text = text.mid(passInt);
         lyricWidth = 0;
-        cout<<"截取后半部分."<<dispText;
+        //cout<<"截取后半部分."<<dispText;
     }
     //分别对横屏和竖屏绘制两种
-    if(orientation=="horizontal"){
+    if(orientation==Oritention::HORIZONTAL){
         textPath.addText(x,y+painter.fontMetrics().ascent(),font,dispText);
     }else{
         painter.rotate(90);
@@ -133,7 +129,7 @@ void DeskLyric::paintEvent(QPaintEvent *){
     double appro = lyricWidth+step;
     lyricWidth = appro;
     //绘制唱过的颜色
-    if(orientation=="horizontal"){
+    if(orientation==Oritention::HORIZONTAL){
         painter.drawText(x,y,lyricWidth,h,Qt::AlignLeft,dispText);
     }else{
         painter.drawText(y,x,lyricWidth,h,Qt::AlignLeft,dispText);

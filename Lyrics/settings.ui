@@ -18,15 +18,15 @@
     <rect>
      <x>180</x>
      <y>30</y>
-     <width>331</width>
-     <height>341</height>
+     <width>292</width>
+     <height>286</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -123,6 +123,19 @@ p, li { white-space: pre-wrap; }
          </item>
         </layout>
        </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>140</y>
+          <width>141</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>重启生效</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="page_5">
        <widget class="QWidget" name="layoutWidget">
@@ -159,6 +172,42 @@ p, li { white-space: pre-wrap; }
         </layout>
        </widget>
       </widget>
+      <widget class="QWidget" name="page_3">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QRadioButton" name="radioButtonLrcStatus">
+          <property name="text">
+           <string>开启</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>显示方式</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxOri">
+            <item>
+             <property name="text">
+              <string>横向</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>纵向</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -168,7 +217,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>10</x>
      <y>50</y>
-     <width>111</width>
+     <width>91</width>
      <height>301</height>
     </rect>
    </property>
@@ -178,53 +227,57 @@ p, li { white-space: pre-wrap; }
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>91</width>
-      <height>151</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="MyLabel" name="labelFont">
-       <property name="text">
-        <string>显示</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="MyLabel" name="labelLang">
-       <property name="text">
-        <string>语言</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="Line" name="line_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="MyLabel" name="labelBackground">
-       <property name="text">
-        <string>背景</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="MyLabel" name="labelFont">
+      <property name="text">
+       <string>显示</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="MyLabel" name="labelLang">
+      <property name="text">
+       <string>语言</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="Line" name="line_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="MyLabel" name="labelBackground">
+      <property name="text">
+       <string>背景</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="Line" name="line_4">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="MyLabel" name="labelDesktopLrc">
+      <property name="text">
+       <string>桌面歌词</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="Line" name="line_3">
    <property name="geometry">

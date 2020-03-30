@@ -22,9 +22,6 @@ Settings::Settings(SetStruct* setStruct,QWidget *parent) : QWidget(parent),ui(ne
     ui->fontComboBox->setStyleSheet("QFontComboBox{font:black;}");
     ui->comboBoxLang->setStyleSheet("QFontComboBox{font:black;}");
     ui->comboBoxColor->setStyleSheet("QFontComboBox{font:black;}");
-    //将config.json的内容写入Combox中
-    resetCombox();
-    this->changeTextBrowser();
     //信号与槽
     connect(ui->labelFont,&MyLabel::clicked,[=](){
         ui->stackedWidget->setCurrentIndex(0);
@@ -35,11 +32,17 @@ Settings::Settings(SetStruct* setStruct,QWidget *parent) : QWidget(parent),ui(ne
     connect(ui->labelBackground,&MyLabel::clicked,[=](){
         ui->stackedWidget->setCurrentIndex(2);
     });
+    connect(ui->labelDesktopLrc,&MyLabel::clicked,[=](){
+        ui->stackedWidget->setCurrentIndex(3);
+    });
     //更新字体展示
     connect(ui->lineEditFontSize,SIGNAL(textChanged(QString)),this,SLOT(dealFontSize(QString)));
     connect(ui->fontComboBox,SIGNAL(currentFontChanged(QFont)),this,SLOT(dealFontFamily(QFont)));
     //json配置文件
     initConfigFile();
+    //将config.json的内容写入Combox中
+    changeTextBrowser();
+    resetCombox();
 }
 void Settings::initConfigFile()
 {
@@ -50,6 +53,28 @@ void Settings::initConfigFile()
         appDir.mkdir(appDataPath);
     }
     this->configName = appDataPath +"/config.json";
+    //读取配置
+    QFile file(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)+"/config.json");
+    if(!file.exists()) return;
+    file.open(QIODevice::ReadOnly);
+    QString config=file.readAll();
+    QJsonDocument document = QJsonDocument::fromJson(config.toUtf8());
+    QJsonObject jsonObject  = document.object();
+    QString lang = jsonObject.value("lang").toString();
+    QString fontSize = jsonObject.value("fontSize").toString();
+    QString fontFamily = jsonObject.value("fontFamily").toString();
+    QString bgColor = jsonObject.value("bgColor").toString();
+    this->setStruct->setAttributes(bgColor,fontFamily,fontSize,lang);
+    QString deskLrcOri = jsonObject.value("deskLrcOri").toString();
+    QString deskLrcStatus = jsonObject.value("deskLrcStatus").toString();
+    setStruct->setDeskLrc(deskLrcStatus,deskLrcOri);
+    if(lang =="简体中文"){
+        trans->load("tr/Translation_CN.qm");
+    }else if(lang == "English"){
+        trans->load("tr/Translation_EN.qm");
+    }
+    ui->retranslateUi(this);
+
 }
 void Settings::resetCombox()
 {
@@ -63,32 +88,38 @@ void Settings::resetCombox()
         this->setPalette(QPalette(QColor(255,255,255)));
         ui->comboBoxColor->setCurrentIndex(1);
     }
+    //桌面歌词部分
+    if(setStruct->deskLrcOri == "HORIZONTAL"){
+        ui->comboBoxOri->setCurrentIndex(0);
+    }else{
+        ui->comboBoxOri->setCurrentIndex(1);
+    }
+    if(setStruct->deskLrcStatus == "on"){
+        ui->radioButtonLrcStatus->setChecked(true);
+    }else{
+        ui->radioButtonLrcStatus->setChecked(false);
+    }
 }
 void Settings::changeTextBrowser()
 {
-     int fontSize= ui->lineEditFontSize->text().toInt();
-     QFont font =ui->fontComboBox->currentFont();
-     font.setPixelSize(fontSize);
+     QFont font;
+     font.setPixelSize(setStruct->fontSize.toInt());
+     font.setFamily(setStruct->fontFamily);
      //更新字体提示框中内容
-     if(fontSize!=0){
+     if(setStruct->fontSize!="0"){
          ui->textBrowser->setFont(font);
          ui->textBrowser->setText(ui->textBrowser->document()->toPlainText());
      }
-     //限制fontSize的最大与最小值
-     fontSize = (fontSize==0)?20:fontSize;
-     fontSize = (fontSize>30)?30:fontSize;
-     QString lang = ui->comboBoxLang->currentText();
-     int bgColorIndex = ui->comboBoxColor->currentIndex();
-     QString bgColor = (bgColorIndex==0)?"dark":"white";
      QJsonObject jsonObject;
-     jsonObject.insert("fontSize",QString::number(fontSize));
-     jsonObject.insert("fontFamily",font.family());
-     jsonObject.insert("lang",lang);
-     jsonObject.insert("bgColor",bgColor);
+     jsonObject.insert("fontSize",setStruct->fontSize);
+     jsonObject.insert("fontFamily",setStruct->fontFamily);
+     jsonObject.insert("lang",setStruct->lang);
+     jsonObject.insert("bgColor",setStruct->bgColor);
+     jsonObject.insert("deskLrcStatus",setStruct->deskLrcStatus);
+     jsonObject.insert("deskLrcOri",setStruct->deskLrcOri);
      QJsonDocument jsonDoc;
      jsonDoc.setObject(jsonObject);
-     QFile file;
-     file.setFileName(this->configName);
+     QFile file(this->configName);
      if(file.exists()){
          file.remove();
      }
@@ -103,37 +134,59 @@ void Settings::changeTextBrowser()
 
 void Settings::dealFontFamily(QFont font)
 {
+    setStruct->fontFamily = font.family();
     changeTextBrowser();
 }
 void Settings::dealFontSize(QString str)
 {
+    setStruct->fontSize = str;
     changeTextBrowser();
 }
 
-void Settings::on_comboBoxLang_currentIndexChanged(const QString &arg1)
+void Settings::on_comboBoxLang_currentIndexChanged(int index)
 {
-    if(arg1 == "简体中文"){
-        cout<<"修改为中文";
-        trans->load("tr/Translation_CN.qm");
-    }else if(arg1 == "English"){
-        trans->load("tr/Translation_EN.qm");
+    if(index==0){
+        setStruct->lang = "简体中文";
+        //trans->load("tr/Translation_CN.qm");
+    }else if(index ==1){
+        setStruct->lang = "English";
+        //trans->load("tr/Translation_EN.qm");
     }
-    ui->retranslateUi(this);
     changeTextBrowser();
-    //重新写入输入框内容
-    resetCombox();
 }
 
 void Settings::on_comboBoxColor_currentIndexChanged(int index)
 {
-    changeTextBrowser();
     //黑色
     if(index==0){
         this->setPalette(QPalette(QColor(51,51,51)));
+        setStruct->bgColor = "dark";
     }
     //白色
     if(index ==1){
         this->setPalette(QPalette(QColor(255,255,255)));
+        setStruct->bgColor = "white";
     }
+    changeTextBrowser();
+}
 
+
+void Settings::on_comboBoxOri_currentIndexChanged(int index)
+{
+    if(index==0){
+        setStruct->deskLrcOri = "HORIZONTAL";
+    }else{
+        setStruct->deskLrcOri = "VERTICAL";
+    }
+    changeTextBrowser();
+}
+
+void Settings::on_radioButtonLrcStatus_clicked(bool checked)
+{
+    if(checked){
+        setStruct->deskLrcStatus = "on";
+    }else{
+        setStruct->deskLrcStatus = "off";
+    }
+    changeTextBrowser();
 }

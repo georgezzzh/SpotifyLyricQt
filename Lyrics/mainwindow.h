@@ -6,6 +6,8 @@
 #include <QTranslator>
 #include "spotify.h"
 #include "client.h"
+#include "neteasecloudmusicclient.h"
+#include "qqmusicclient.h"
 #include "settings.h"
 #include "desklyric.h"
 
@@ -28,7 +30,8 @@ public:
     ~MainWindow();
     //根据时间重新调整歌词的锚点
     void resetLyricDisplay();
-    void configInit();
+    void configChange();
+    void langInit();
 private:
     Ui::MainWindow *ui;
     QTranslator* trans;
@@ -36,6 +39,8 @@ private:
     SetStruct* setStruct;
     Spotify * sp;
     Client* client;
+    QQMusicClient* qqClient;
+    NeteaseCloudMusicClient* neteaseClient;
     DeskLyric* deskLyric;
     //保存歌曲名
     QString songFlag;
@@ -46,6 +51,8 @@ private:
     int lastIndex;
     //检测鼠标是否滚动
     bool wheelScroll;
+    //检查是否切换过客户端
+    bool switchClient;
 public slots:
     //获取到歌词,调用的槽函数
     void dealLyricSlot(QString lyric);

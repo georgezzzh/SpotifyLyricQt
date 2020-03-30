@@ -25,6 +25,8 @@ SOURCES += \
     mainwindow.cpp \
     mylabel.cpp \
     mytextbrowser.cpp \
+    neteasecloudmusicclient.cpp \
+    qqmusicclient.cpp \
     settings.cpp \
     spotify.cpp
 
@@ -34,6 +36,8 @@ HEADERS += \
     mainwindow.h \
     mylabel.h \
     mytextbrowser.h \
+    neteasecloudmusicclient.h \
+    qqmusicclient.h \
     settings.h \
     spotify.h
 

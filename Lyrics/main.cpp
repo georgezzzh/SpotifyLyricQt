@@ -10,6 +10,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    //关闭主窗口时,全部关闭
+    a.connect(&a,&QApplication::lastWindowClosed,&a,&QApplication::closeAllWindows);
     MainWindow w;
     w.setWindowTitle("Spotify Lyric Qt");
     //设置图标
