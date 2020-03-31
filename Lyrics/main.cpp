@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.setWindowTitle("Spotify Lyric Qt");
     //设置图标
-    w.setWindowIcon(QIcon("://icon/main.ico"));
+    //w.setWindowIcon(QIcon("://icon/main.ico"));
     w.resize(800,600);
     w.show();
     return a.exec();

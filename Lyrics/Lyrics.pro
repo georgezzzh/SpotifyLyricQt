@@ -1,10 +1,12 @@
 QT       += core gui
 QT       += network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
+#win32API支持
 LIBS += -luser32
 # 中英文支持
 TRANSLATIONS = Translation_EN.ts Translation_CN.ts
+# 编译出的exe带有图标
+RC_ICONS += exeIcon.ico
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use

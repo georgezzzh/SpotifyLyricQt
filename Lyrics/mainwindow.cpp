@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     QString sss="QSlider::add-page:Horizontal{background-color: rgb(87, 97, 106);height:4px;}";
     sss += "QSlider::sub-page:Horizontal{height:4px;background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(231,80,229, 255), stop:1 rgba(7,208,255, 255));}";
     sss += "QSlider::groove:Horizontal{background:transparent;height:6px;}";
-    sss += "QSlider::handle:Horizontal{height: 30px;width:8px;border-image: url(://icon/dot.png);margin: -8 0px;}";
+    sss += "QSlider::handle:Horizontal{height: 30px;width:22px;border-image: url(://icon/dot.png);margin: -8 0px;}";
     ui->horizontalSlider->setStyleSheet(sss);
     //当前播放时间
     connect(ui->horizontalSlider,&QSlider::valueChanged,this,[=](){
@@ -58,6 +58,17 @@ MainWindow::MainWindow(QWidget *parent)
            i++;
        }
        cout<<"滑动进度条, value:"<<val;
+    });
+    //歌词加速与减速设置
+    connect(ui->speedUp,&MyLabel::clicked,[=](){
+        int val = ui->horizontalSlider->value()+1;
+        ui->horizontalSlider->setValue(val);
+        emit ui->horizontalSlider->sliderMoved(val);
+    });
+    connect(ui->speedDown,&MyLabel::clicked,[=](){
+        int val = ui->horizontalSlider->value()-1;
+        ui->horizontalSlider->setValue(val);
+        emit ui->horizontalSlider->sliderMoved(val);
     });
     //歌词显示设置
     ui->lyricLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -110,7 +121,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(sp,SIGNAL(threadOver(QString)),this,SLOT(dealSongName(QString)));
     //关闭函数时,线程退出
     connect(this,&MainWindow::destroyed,this,[=](){
-
        if(sp->isRunning()){
            sp->setRunning(false);
            sp->exit(0);

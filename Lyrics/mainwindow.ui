@@ -33,11 +33,29 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="currentTimeLabel">
-      <property name="text">
-       <string>00:00</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="currentTimeLabel">
+        <property name="text">
+         <string>00:00</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="MyLabel" name="speedDown">
+        <property name="text">
+         <string>&lt;&lt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="MyLabel" name="speedUp">
+        <property name="text">
+         <string>&gt;&gt;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -88,6 +106,11 @@
    <class>MyTextBrowser</class>
    <extends>QTextBrowser</extends>
    <header location="global">mytextbrowser.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MyLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">mylabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

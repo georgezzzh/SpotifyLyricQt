@@ -22,6 +22,7 @@ Settings::Settings(SetStruct* setStruct,QWidget *parent) : QWidget(parent),ui(ne
     ui->fontComboBox->setStyleSheet("QFontComboBox{font:black;}");
     ui->comboBoxLang->setStyleSheet("QFontComboBox{font:black;}");
     ui->comboBoxColor->setStyleSheet("QFontComboBox{font:black;}");
+    ui->comboBoxOri->setStyleSheet("QFontComboBox{font:black;}");
     //信号与槽
     connect(ui->labelFont,&MyLabel::clicked,[=](){
         ui->stackedWidget->setCurrentIndex(0);

@@ -10,38 +10,53 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="21"/>
-        <source>song title</source>
+        <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="38"/>
+        <location filename="mainwindow.ui" line="40"/>
         <source>00:00</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="55"/>
+        <location filename="mainwindow.ui" line="47"/>
+        <source>&lt;&lt;</source>
+        <translation type="unfinished">&lt;&lt;</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="54"/>
+        <source>&gt;&gt;</source>
+        <translation type="unfinished">&gt;&gt;</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="73"/>
         <source>选项</source>
         <translation type="unfinished">选项</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="62"/>
+        <location filename="mainwindow.ui" line="80"/>
         <source>关于</source>
         <translation type="unfinished">关于</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="72"/>
+        <location filename="mainwindow.ui" line="90"/>
         <source>设置</source>
         <translation type="unfinished">设置</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="77"/>
+        <location filename="mainwindow.ui" line="95"/>
         <source>导出歌词</source>
         <translation type="unfinished">导出歌词</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="82"/>
+        <location filename="mainwindow.ui" line="100"/>
         <source>关于本项目</source>
         <translation type="unfinished">关于本项目</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="255"/>
+        <source>服务端未查到该歌词或其他未知错误</source>
+        <translation type="unfinished">服务端未查到该歌词或其他未知错误</translation>
     </message>
 </context>
 <context>
@@ -58,7 +73,8 @@
     </message>
     <message>
         <location filename="settings.ui" line="51"/>
-        <source>15</source>
+        <source>20</source>
+        <oldsource>15</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -84,42 +100,72 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="settings.ui" line="114"/>
         <source>简体中文</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">简体中文</translation>
     </message>
     <message>
         <location filename="settings.ui" line="119"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">English</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="141"/>
+        <location filename="settings.ui" line="136"/>
+        <source>重启生效</source>
+        <translation type="unfinished">重启生效</translation>
+    </message>
+    <message>
+        <location filename="settings.ui" line="154"/>
         <source>背景颜色</source>
         <translation type="unfinished">背景颜色</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="149"/>
+        <location filename="settings.ui" line="162"/>
         <source>黑色</source>
         <translation type="unfinished">黑色</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="154"/>
+        <location filename="settings.ui" line="167"/>
         <source>白色</source>
         <translation type="unfinished">白色</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="194"/>
+        <location filename="settings.ui" line="180"/>
+        <source>开启</source>
+        <translation type="unfinished">开启</translation>
+    </message>
+    <message>
+        <location filename="settings.ui" line="189"/>
+        <source>显示方式</source>
+        <translation type="unfinished">显示方式</translation>
+    </message>
+    <message>
+        <location filename="settings.ui" line="197"/>
+        <source>横向</source>
+        <translation type="unfinished">横向</translation>
+    </message>
+    <message>
+        <location filename="settings.ui" line="202"/>
+        <source>纵向</source>
+        <translation type="unfinished">纵向</translation>
+    </message>
+    <message>
+        <location filename="settings.ui" line="234"/>
         <source>显示</source>
         <translation type="unfinished">显示</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="208"/>
+        <location filename="settings.ui" line="248"/>
         <source>语言</source>
         <translation type="unfinished">语言</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="222"/>
+        <location filename="settings.ui" line="262"/>
         <source>背景</source>
         <translation type="unfinished">背景</translation>
+    </message>
+    <message>
+        <location filename="settings.ui" line="276"/>
+        <source>桌面歌词</source>
+        <translation type="unfinished">桌面歌词</translation>
     </message>
 </context>
 </TS>
