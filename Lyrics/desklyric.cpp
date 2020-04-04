@@ -24,6 +24,18 @@ DeskLyric::DeskLyric(QWidget *parent) : QWidget(parent)
     this->setWindowTitle("desktop lyric");
     this->setAttribute(Qt::WA_TranslucentBackground);
     this->setCursor(Qt::OpenHandCursor);
+    int deskwidth=QApplication::desktop()->width();
+    int deskheight=QApplication::desktop()->height();
+    if(orientation==Oritention::HORIZONTAL){
+        this->leftTop.setX(100);
+        this->leftTop.setY(deskheight-200);
+        //函数四个参数: x y w h
+        setGeometry(leftTop.x(),leftTop.y(),deskwidth-200,60);
+    }else{
+        this->leftTop.setX(100);
+        this->leftTop.setY(200);
+        setGeometry(leftTop.x(),leftTop.y(),60,deskheight-200);
+    }
     this->lyricWidth = 0;
     this->duration = 0;
     this->text = "...";
@@ -57,15 +69,17 @@ void DeskLyric::mousePressEvent(QMouseEvent *ev)
 void DeskLyric::mouseMoveEvent(QMouseEvent *ev)
 {
     this->move(ev->globalPos()-p);
+    this->leftTop.setX(frameGeometry().x());
+    this->leftTop.setY(frameGeometry().y());
 }
 void DeskLyric::paintEvent(QPaintEvent *){
     int deskwidth=QApplication::desktop()->width();
     int deskheight=QApplication::desktop()->height();
     if(orientation==Oritention::HORIZONTAL){
         //函数四个参数: x y w h
-        setGeometry(100,deskheight-200,deskwidth-200,60);
+        setGeometry(leftTop.x(),leftTop.y(),deskwidth-200,60);
     }else{
-        setGeometry(100,200,60,deskheight-200);
+        setGeometry(leftTop.x(),leftTop.y(),60,deskheight-200);
     }
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);

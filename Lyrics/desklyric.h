@@ -25,6 +25,8 @@ private:
     double step;
     //用于鼠标拖动
     QPoint p;
+    //用于动态调正位置坐标的
+    QPoint leftTop;
     //用于显示横屏还是竖屏模式
     Oritention orientation;
     QString text ;
