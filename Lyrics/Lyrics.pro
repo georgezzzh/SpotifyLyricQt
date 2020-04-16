@@ -1,5 +1,8 @@
 QT       += core gui
 QT       += network
+unix{
+    QT  += dbus
+}
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 #win32API支持
 win32{

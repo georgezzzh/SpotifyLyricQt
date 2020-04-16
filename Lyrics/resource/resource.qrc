@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>icon/set.ico</file>
         <file>icon/dot.png</file>
+        <file>icon/exeIcon.ico</file>
     </qresource>
 </RCC>
