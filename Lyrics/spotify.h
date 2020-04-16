@@ -16,7 +16,6 @@ class Spotify :public QThread
         void run() override;
     private:
         bool running;
-
     signals:
         void threadOver(QString);
 

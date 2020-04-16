@@ -1,13 +1,16 @@
+#if defined (WIN32)
+    #include <windows.h>
+    #include <tlhelp32.h>
+#else
 
-#include <windows.h>
-#include <tlhelp32.h>
-#include <clocale>
+#endif
 #include <QDebug>
 #include "spotify.h"
 
-#define WINDOW_TEXT_LENGTH 256
 QString Spotify::song;
 
+#if defined(WIN32)
+#define WINDOW_TEXT_LENGTH 256
 //这个子函数没啥用
 BOOL CALLBACK EnumChildWindowCallBack(HWND hWnd, LPARAM lParam)
 {
@@ -78,6 +81,12 @@ QString Spotify::getSongName()
     }
     return song;
 }
+#else
+QString Spotify::getSongName()
+{
+    return "linux";
+}
+#endif
 void Spotify::run()
 {
     while(running){
