@@ -44,7 +44,7 @@ public:
 private:
     void initConfigFile();
     void resetCombox();
-    void changeTextBrowser();
+    void changeSet();
     Ui::Settings *ui;
     QString configName;
     SetStruct* setStruct;

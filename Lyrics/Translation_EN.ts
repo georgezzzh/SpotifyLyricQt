@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="21"/>
-        <source>TextLabel</source>
+        <source>title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -52,6 +52,16 @@
         <location filename="mainwindow.ui" line="100"/>
         <source>关于本项目</source>
         <translation type="unfinished">About this</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="204"/>
+        <source>未找到Spotify进程</source>
+        <translation type="unfinished">Failed to find out Spotify progress</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="206"/>
+        <source>未能获取到播放的歌目</source>
+        <translation type="unfinished">Failed to get song that&apos;s playing</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="255"/>

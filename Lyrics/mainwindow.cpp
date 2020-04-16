@@ -166,6 +166,8 @@ void MainWindow::resetLyricDisplay()
     }else{
         fontColorStyle = " color='black' ";
     }
+    QString highLightLrc;
+    double durationTime = 0;
     for(int i=0; i<this->list.size();i++){
         //未开始时, anchor设在首句
         if(lastIndex<3 && i==0){
@@ -178,19 +180,18 @@ void MainWindow::resetLyricDisplay()
                 text = text+"<h3><font color='green'>"+list[i].lyric+"</font></h3>";
                 list[i].highLight = true;
                 lastIndexUpdate = i;
-                //设置桌面歌词,持续时间
-                this->deskLyric->setLyricText(list[i].lyric);
-                if(i+1<list.size()){
-                    deskLyric->setDuration(list[i+1].time-list[i].time);
-                }else{
-                    deskLyric->setDuration(2);
-                }
-                deskLyric->update();
+                //修改桌面歌词
+                highLightLrc = list[i].lyric;
+                durationTime = (i+1<list.size())?(list[i+1].time-list[i].time):2;
             }else{
                 text = text+"<p"+fontColorStyle+"><font"+fontColorStyle+">"+list[i].lyric+"</font><p>";
             }
         }
     }
+    //更新桌面歌词
+    this->deskLyric->setLyricText(highLightLrc);
+    deskLyric->setDuration(durationTime);
+    deskLyric->update();
     //更新anchor的位置
     lastIndex = (lastIndexUpdate == 0)?lastIndex:lastIndexUpdate;
     ui->lyricLabel->setText(text);
@@ -201,9 +202,9 @@ void MainWindow::resetLyricDisplay()
 void MainWindow::dealSongName(QString songName)
 {
     if(songName=="-1"){
-        ui->title->setText("未找到Spotify进程");
+        ui->title->setText(tr("未找到Spotify进程"));
     }else if(songName == ""){
-        ui->title->setText("未能获取到播放的歌目");
+        ui->title->setText(tr("未能获取到播放的歌目"));
     }else{
         //歌曲未切换时,不做处理
         if(songName == songFlag){

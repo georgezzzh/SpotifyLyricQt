@@ -42,7 +42,7 @@ Settings::Settings(SetStruct* setStruct,QWidget *parent) : QWidget(parent),ui(ne
     //json配置文件
     initConfigFile();
     //将config.json的内容写入Combox中
-    changeTextBrowser();
+    changeSet();
     resetCombox();
 }
 void Settings::initConfigFile()
@@ -101,7 +101,7 @@ void Settings::resetCombox()
         ui->radioButtonLrcStatus->setChecked(false);
     }
 }
-void Settings::changeTextBrowser()
+void Settings::changeSet()
 {
      QFont font;
      font.setPixelSize(setStruct->fontSize.toInt());
@@ -136,12 +136,12 @@ void Settings::changeTextBrowser()
 void Settings::dealFontFamily(QFont font)
 {
     setStruct->fontFamily = font.family();
-    changeTextBrowser();
+    changeSet();
 }
 void Settings::dealFontSize(QString str)
 {
     setStruct->fontSize = str;
-    changeTextBrowser();
+    changeSet();
 }
 
 void Settings::on_comboBoxLang_currentIndexChanged(int index)
@@ -153,7 +153,7 @@ void Settings::on_comboBoxLang_currentIndexChanged(int index)
         setStruct->lang = "English";
         //trans->load("tr/Translation_EN.qm");
     }
-    changeTextBrowser();
+    changeSet();
 }
 
 void Settings::on_comboBoxColor_currentIndexChanged(int index)
@@ -168,7 +168,7 @@ void Settings::on_comboBoxColor_currentIndexChanged(int index)
         this->setPalette(QPalette(QColor(255,255,255)));
         setStruct->bgColor = "white";
     }
-    changeTextBrowser();
+    changeSet();
 }
 
 
@@ -179,7 +179,7 @@ void Settings::on_comboBoxOri_currentIndexChanged(int index)
     }else{
         setStruct->deskLrcOri = "VERTICAL";
     }
-    changeTextBrowser();
+    changeSet();
 }
 
 void Settings::on_radioButtonLrcStatus_clicked(bool checked)
@@ -189,5 +189,5 @@ void Settings::on_radioButtonLrcStatus_clicked(bool checked)
     }else{
         setStruct->deskLrcStatus = "off";
     }
-    changeTextBrowser();
+    changeSet();
 }
