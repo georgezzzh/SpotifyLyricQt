@@ -11,7 +11,7 @@
 #define cout qDebug().noquote()<<"["<<__FILE__<<":"<<__LINE__<<"]: "
 void DeskLyric::setLyricText(QString text)
 {
-    this->text = (text=="") ? "..." : text;
+    this->text = (text=="") ? " " : text;
 }
 
 DeskLyric::DeskLyric(QWidget *parent) : QWidget(parent)
@@ -54,7 +54,7 @@ void DeskLyric::setDuration(double duration)
     QPainter painter;
     if(duration!=0){
         this->step = lineWidth/(this->duration/0.07);
-        //cout<<"texLen:"<<lineWidth<<"duration:"<<duration<<",step:"<<step;
+        //cout<<"texLen:"<<lineWidth<<"duration:"<<duration<<",step:"<<step<<","<<text;
     }
     else
         this->step = 100;
@@ -86,7 +86,7 @@ void DeskLyric::paintEvent(QPaintEvent *){
     QFont font("Times",30,QFont::Bold);
     painter.setFont(font);
     //用指定的颜色设置画刷
-    painter.setBrush(QBrush("blue"));
+    painter.setBrush(QBrush(QColor(187,187,187)));
     painter.setPen(Qt::NoPen);
     QPainterPath textPath;
     //获取当前字体高度
@@ -113,7 +113,7 @@ void DeskLyric::paintEvent(QPaintEvent *){
     //整句歌词的长度
     int len = painter.fontMetrics().horizontalAdvance(text);
     if(len>100){
-        lineWidth = painter.fontMetrics().horizontalAdvance(text);
+        lineWidth = len;
     }
     if(lyricLen > lineMaxLen && lyricWidth < lineMaxLen ){
          int len = lineMaxLen/charLen;
@@ -139,9 +139,8 @@ void DeskLyric::paintEvent(QPaintEvent *){
     //绘制完整的一句歌词
     painter.drawPath(textPath);
     //唱过的歌词显示的颜色
-    painter.setPen(Qt::yellow);
-    double appro = lyricWidth+step;
-    lyricWidth = appro;
+    painter.setPen(QColor(29,185,84));
+    lyricWidth += step;
     //绘制唱过的颜色
     if(orientation==Oritention::HORIZONTAL){
         painter.drawText(x,y,lyricWidth,h,Qt::AlignLeft,dispText);

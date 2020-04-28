@@ -17,7 +17,7 @@ protected:
     void mousePressEvent(QMouseEvent* ev) override;
 private:
     //唱过的歌词长度
-    int lyricWidth;
+    double lyricWidth;
     //整句歌词的长度
     int lineWidth;
     //持续时间
