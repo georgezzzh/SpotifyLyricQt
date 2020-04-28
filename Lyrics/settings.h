@@ -22,7 +22,7 @@ public:
       this->fontFamily = fontFamily;
       this->fontSize = fontSize;
       this->lang = lang;
-      this->deskLrcStatus = "on";
+      this->deskLrcStatus = "off";
       this->deskLrcOri = "HORIZONTAL";
   }
   void setDeskLrc(QString deskLrcStatus = "on",QString deskLrcOri = "HORIZONTAL"){
