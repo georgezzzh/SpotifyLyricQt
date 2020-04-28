@@ -57,14 +57,16 @@ MainWindow::MainWindow(QWidget *parent)
            list[i].highLight = false;
            i++;
        }
-       cout<<"滑动进度条, value:"<<val;
+       //cout<<"滑动进度条, value:"<<val;
     });
     //歌词加速与减速设置
+    ui->speedUp->setToolTip(tr("歌词前进"));
     connect(ui->speedUp,&MyLabel::clicked,[=](){
         int val = ui->horizontalSlider->value()+1;
         ui->horizontalSlider->setValue(val);
         emit ui->horizontalSlider->sliderMoved(val);
     });
+    ui->speedDown->setToolTip(tr("歌词后退"));
     connect(ui->speedDown,&MyLabel::clicked,[=](){
         int val = ui->horizontalSlider->value()-1;
         ui->horizontalSlider->setValue(val);
@@ -75,7 +77,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->title->setAlignment(Qt::AlignCenter);
     ui->menubar->setStyleSheet("QMenubar{font-color:black;}");
     this->wheelScroll = false;
-
     //桌面歌词
     this->deskLyric = new DeskLyric();
     //设置配置
@@ -87,6 +88,17 @@ MainWindow::MainWindow(QWidget *parent)
     configChange();
     connect(this->set,&Settings::setChangeSignal,this,[=](){
         //更新保存的设置配置
+        configChange();
+    });
+    //桌面歌词标识
+    ui->desklyricFlag->setToolTip(tr("桌面歌词"));
+    ui->desklyricFlag->setFont(QFont("微软雅黑",13));
+    connect(ui->desklyricFlag,&MyLabel::clicked,[=](){
+        if(setStruct->deskLrcStatus == "on"){
+            setStruct->deskLrcStatus = "off";
+        }else{
+            setStruct->deskLrcStatus = "on";
+        }
         configChange();
     });
     connect(ui->actionSettings,&QAction::triggered,[=](){
@@ -177,7 +189,7 @@ void MainWindow::resetLyricDisplay()
             text = text+"<p><a name='myAnchor'><font"+fontColorStyle+">"+list[i].lyric+"</font><a></p>";
         }else{
             if(list[i].time<(diff/1000) && !list[i].highLight){
-                text = text+"<h3><font color='green'>"+list[i].lyric+"</font></h3>";
+                text = text+"<h3><font color='#1DB954'>"+list[i].lyric+"</font></h3>";
                 list[i].highLight = true;
                 lastIndexUpdate = i;
                 //修改桌面歌词
@@ -291,21 +303,29 @@ void MainWindow::configChange()
     if(setStruct->bgColor=="dark"){
         this->setPalette(QPalette(QColor(34,34,34)));
         ui->lyricLabel->setStyleSheet("QTextBrowser{background-color:#222222;border-radius:8px;"+fontSizeStyle+"}");
+        ui->desklyricFlag->setStyleSheet("QLabel{color:white;}QLabel:hover{color:rgb(29,185,84);}");
+        ui->speedUp->setStyleSheet("QLabel{color:white;}QLabel:hover{color:#1DB954;}");
+        ui->speedDown->setStyleSheet("QLabel{color:white;}QLabel:hover{color:#1DB954;}");
     }else{
         this->setPalette(QPalette(QColor(255,255,255)));
         ui->lyricLabel->setStyleSheet("QTextBrowser{background-color:#ffffff;border-radius:8px;"+fontSizeStyle+"}");
+        ui->desklyricFlag->setStyleSheet("QLabel{color:black;}QLabel:hover{color:rgb(29,185,84);}");
+        ui->speedUp->setStyleSheet("QLabel{color:black;}QLabel:hover{color:#1DB954;}");
+        ui->speedDown->setStyleSheet("QLabel{color:black;}QLabel:hover{color:#1DB954;}");
     }
     //重新写入title
     ui->title->setText(this->songFlag);
-    if(setStruct->deskLrcOri=="VERTICAL"){
-        this->deskLyric->setOrientation(Oritention::VERTICAL);
-    }else{
-        this->deskLyric->setOrientation(Oritention::HORIZONTAL);
-    }
-    if(setStruct->deskLrcStatus == "off")
+    ui->title->setFont(QFont("黑体",15));
+    Oritention ori = setStruct->deskLrcOri=="VERTICAL" ? VERTICAL : HORIZONTAL;
+    this->deskLyric->setOrientation(ori);
+    if(setStruct->deskLrcStatus == "off"){
         this->deskLyric->hide();
-    else
+    }
+    else{
         this->deskLyric->show();
+        ui->desklyricFlag->setStyleSheet("QLabel{color:#1DB954;}QLabel:hover{color:#1DB954;}");
+    }
+
 }
 void MainWindow::langInit()
 {
