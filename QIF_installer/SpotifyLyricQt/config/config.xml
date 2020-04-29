@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Spotify Lyric Qt</Name>
+    <Version>1.0.0</Version>
+    <Title>Spotify LyricQt Installer</Title>
+    <Publisher>georgezzzh</Publisher>
+	<!--开始菜单的名字-->
+    <StartMenuDir>Spotify LyricQt</StartMenuDir>
+    <!--<TargetDir>@Program File@/Spotify Lyric</TargetDir>-->
+	<!--安装包的图标-->
+	<WizardStyle>Classic</WizardStyle>
+    <InstallerApplicationIcon>icon</InstallerApplicationIcon>
+	<!--安装中页面的图标-->
+	<InstallerWindowIcon>qt.png</InstallerWindowIcon>
+</Installer>

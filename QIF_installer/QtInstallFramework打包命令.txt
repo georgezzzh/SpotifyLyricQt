@@ -1,0 +1,2 @@
+ # 打包运行命令, 切换到$Qt Install Framework$\bin目录下,运行如下命令
+ ./binarycreator.exe -c C:\Users\geoge\Desktop\SpotifyLyricQt\config\config.xml -p C:\Users\geoge\Desktop\SpotifyLyricQt\packages SpotifyLyricQt.exe -v
