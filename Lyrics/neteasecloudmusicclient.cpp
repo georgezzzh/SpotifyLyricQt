@@ -19,8 +19,11 @@ NeteaseCloudMusicClient::NeteaseCloudMusicClient(QObject *parent) : Client(paren
     connect(networkManager2,SIGNAL(finished(QNetworkReply*)),this,SLOT(lyricsSlot(QNetworkReply*)));
 }
 
-void NeteaseCloudMusicClient::sendHttpRequest(QString title)
+void NeteaseCloudMusicClient::sendHttpRequest(QString title,bool forceHttp)
 {
+    if(forceHttp){
+        removeBuffer();
+    }
     //无缓冲时进行网络请求
     if(!readBuffer()){
         QNetworkRequest request = QNetworkRequest(QUrl("http://www.sonydafa.com:3000/search?keywords="+title));

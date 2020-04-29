@@ -101,6 +101,21 @@ MainWindow::MainWindow(QWidget *parent)
         }
         configChange();
     });
+    //歌词有误标识
+    ui->lyricErrorFlag->setToolTip(tr("歌词有误"));
+    ui->lyricErrorFlag->setFont(QFont("微软雅黑",13));
+    connect(ui->lyricErrorFlag,&MyLabel::clicked,[=](){
+        if(!switchClient){
+            switchClient = true;
+            client = neteaseClient;
+            client->setSongTitle(songFlag);
+            client->sendHttpRequest(songFlag,true);
+        }else{
+            //修改返回信息为 错误
+            client->removeBuffer();
+            dealLyricSlot("");
+        }
+    });
     connect(ui->actionSettings,&QAction::triggered,[=](){
         set->setWindowModality(Qt::WindowModality::ApplicationModal);
         set->show();
@@ -246,7 +261,7 @@ void MainWindow::dealSongName(QString songName)
         songFlag = songName;
         ui->title->setText(songName);
         client->setSongTitle(songName);
-        client->sendHttpRequest(songName);
+        client->sendHttpRequest(songName,false);
     }
 }
 
@@ -258,10 +273,12 @@ void MainWindow::dealLyricSlot(QString lyric)
             switchClient = true;
             if(client == this->qqClient){
                 client = neteaseClient;
-                client->sendHttpRequest(songFlag);
+                client->setSongTitle(songFlag);
+                client->sendHttpRequest(songFlag,false);
             }else{
                 client = this->qqClient;
-                client->sendHttpRequest(songFlag);
+                client->setSongTitle(songFlag);
+                client->sendHttpRequest(songFlag,false);
             }
         }else{
             this->list.clear();
@@ -304,12 +321,14 @@ void MainWindow::configChange()
         this->setPalette(QPalette(QColor(34,34,34)));
         ui->lyricLabel->setStyleSheet("QTextBrowser{background-color:#222222;border-radius:8px;"+fontSizeStyle+"}");
         ui->desklyricFlag->setStyleSheet("QLabel{color:white;}QLabel:hover{color:rgb(29,185,84);}");
+        ui->lyricErrorFlag->setStyleSheet("QLabel{color:white;}QLabel:hover{color:rgb(255,0,0);}");
         ui->speedUp->setStyleSheet("QLabel{color:white;}QLabel:hover{color:#1DB954;}");
         ui->speedDown->setStyleSheet("QLabel{color:white;}QLabel:hover{color:#1DB954;}");
     }else{
         this->setPalette(QPalette(QColor(255,255,255)));
         ui->lyricLabel->setStyleSheet("QTextBrowser{background-color:#ffffff;border-radius:8px;"+fontSizeStyle+"}");
-        ui->desklyricFlag->setStyleSheet("QLabel{color:black;}QLabel:hover{color:rgb(29,185,84);}");
+        ui->desklyricFlag->setStyleSheet("QLabel{color:#555555;}QLabel:hover{color:rgb(29,185,84);}");
+        ui->lyricErrorFlag->setStyleSheet("QLabel{color:#555555;}QLabel:hover{color:rgb(255,0,0);}");
         ui->speedUp->setStyleSheet("QLabel{color:black;}QLabel:hover{color:#1DB954;}");
         ui->speedDown->setStyleSheet("QLabel{color:black;}QLabel:hover{color:#1DB954;}");
     }

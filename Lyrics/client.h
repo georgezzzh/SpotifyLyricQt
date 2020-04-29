@@ -11,9 +11,10 @@ class Client : public QObject
 public:
     explicit Client(QObject *parent = nullptr);
 
-    //发送请求歌曲id的http请求
-    virtual void sendHttpRequest(QString title)=0;
-    void setSongTitle(QString title){this->songTitle=title;}
+    //发送请求歌曲id的http请求, 第二个参数为是否不进行读取本地缓冲
+    virtual void sendHttpRequest(QString title,bool forceHttp)=0;
+    void setSongTitle(QString title);
+    void removeBuffer();
 protected:
     //检查本地是否有缓冲,有缓冲返回true,同时发送信号;否则返回false
     bool readBuffer();

@@ -24,8 +24,7 @@ Client::Client(QObject *parent):QObject(parent)
 bool Client::readBuffer()
 {
     //先查看是否有缓冲文件
-    QString lyricFilePath = appDataPath+"/"+songTitle+".txt";
-    QFile lyricFile(lyricFilePath);
+    QFile lyricFile(songTitle);
     if(appDataPath!="" && lyricFile.exists()){
         lyricFile.open(QIODevice::ReadOnly);
         QString lyric = lyricFile.readAll();
@@ -37,12 +36,18 @@ bool Client::readBuffer()
     }
     return false;
 }
-
+void Client::removeBuffer()
+{
+    QFile lyricFile(songTitle);
+    if(lyricFile.exists()){
+        lyricFile.remove();
+    }
+    cout<<songTitle<<",已经删除";
+}
 void Client::takeBuffer(QString lyric)
 {
-    QString lyricFilePath = appDataPath+"/"+this->songTitle+".txt";
     if(lyric == "") return;
-    QFile lyricFile(lyricFilePath);
+    QFile lyricFile(songTitle);
     if(lyricFile.exists()){
         lyricFile.remove();
     }
@@ -50,4 +55,8 @@ void Client::takeBuffer(QString lyric)
         lyricFile.write(lyric.toUtf8());
     }
     lyricFile.close();
+}
+void Client::setSongTitle(QString title)
+{
+    songTitle = appDataPath+"/"+title+".txt";
 }

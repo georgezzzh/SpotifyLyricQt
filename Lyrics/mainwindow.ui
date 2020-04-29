@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>972</width>
-    <height>506</height>
+    <width>821</width>
+    <height>514</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -95,6 +95,26 @@
        </spacer>
       </item>
       <item>
+       <widget class="MyLabel" name="lyricErrorFlag">
+        <property name="text">
+         <string>误</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="MyLabel" name="desklyricFlag">
         <property name="text">
          <string>词</string>
@@ -110,7 +130,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>972</width>
+     <width>821</width>
      <height>26</height>
     </rect>
    </property>

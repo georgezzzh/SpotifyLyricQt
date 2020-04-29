@@ -9,7 +9,7 @@ class NeteaseCloudMusicClient : public Client
     Q_OBJECT
 public:
     explicit NeteaseCloudMusicClient(QObject *parent = nullptr);
-    void sendHttpRequest(QString title);
+    void sendHttpRequest(QString title,bool forceHttp);
 private:
     QNetworkAccessManager* networkManager;
     QNetworkAccessManager* networkManager2;

@@ -20,8 +20,11 @@ QQMusicClient::QQMusicClient(QObject *parent) : Client(parent)
     networkManager2 = new QNetworkAccessManager(this);
     connect(networkManager2,SIGNAL(finished(QNetworkReply*)),this,SLOT(lyricSlot(QNetworkReply*)));
 }
-void QQMusicClient::sendHttpRequest(QString title)
+void QQMusicClient::sendHttpRequest(QString title,bool forceHttp)
 {
+    if(forceHttp){
+        removeBuffer();
+    }
     if(!readBuffer()){
         QString url = "https://c.y.qq.com/soso/fcgi-bin/client_search_cp?p=1&n=2&w="+title+"&format=json";
         QNetworkRequest request = QNetworkRequest(QUrl(url));
