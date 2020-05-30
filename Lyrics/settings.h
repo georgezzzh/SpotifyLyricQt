@@ -16,7 +16,7 @@ public:
   QString deskLrcStatus;
   QString deskLrcOri;
   //语言不设置预置项
-  SetStruct(QString bgColor="dark",QString fontFamily="Arial",
+  SetStruct(QString bgColor="white",QString fontFamily="Arial",
             QString fontSize="20",QString lang="")  {
       this->bgColor = bgColor;
       this->fontFamily = fontFamily;
@@ -25,7 +25,7 @@ public:
       this->deskLrcStatus = "off";
       this->deskLrcOri = "HORIZONTAL";
   }
-  void setDeskLrc(QString deskLrcStatus = "on",QString deskLrcOri = "HORIZONTAL"){
+  void setDeskLrc(QString deskLrcStatus = "off",QString deskLrcOri = "HORIZONTAL"){
       this->deskLrcOri = deskLrcOri;
       this->deskLrcStatus = deskLrcStatus;
   }

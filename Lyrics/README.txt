@@ -1,0 +1,1 @@
+本目录为源码，Translation_CN.qm和Translation_EN.qm应该在tr目录下。

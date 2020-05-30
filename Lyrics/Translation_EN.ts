@@ -11,12 +11,12 @@
     <message>
         <location filename="mainwindow.ui" line="21"/>
         <source>title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Song Name</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="40"/>
         <source>00:00</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">0:00</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="47"/>
