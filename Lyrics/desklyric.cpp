@@ -86,7 +86,8 @@ void DeskLyric::paintEvent(QPaintEvent *){
     QFont font("Times",30,QFont::Bold);
     painter.setFont(font);
     //用指定的颜色设置画刷
-    painter.setBrush(QBrush(QColor(187,187,187)));
+    painter.setBrush(QBrush(QColor(29,185,84)));
+    //painter.setBrush(QBrush(QColor(187,187,187)));
     painter.setPen(Qt::NoPen);
     QPainterPath textPath;
     //获取当前字体高度
@@ -142,9 +143,12 @@ void DeskLyric::paintEvent(QPaintEvent *){
     painter.setPen(QColor(29,185,84));
     lyricWidth += step;
     //绘制唱过的颜色
+    //ubuntu block
+    /*
     if(orientation==Oritention::HORIZONTAL){
         painter.drawText(x,y,lyricWidth,h,Qt::AlignLeft,dispText);
     }else{
         painter.drawText(y,x,lyricWidth,h,Qt::AlignLeft,dispText);
     }
+    */
 }
