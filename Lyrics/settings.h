@@ -57,7 +57,7 @@ private slots:
     void on_comboBoxColor_currentIndexChanged(int index);
     void on_comboBoxLang_currentIndexChanged(int index);
     void on_comboBoxOri_currentIndexChanged(int index);
-    void on_radioButtonLrcStatus_clicked(bool checked);
+    void dealAppleBtnLrc(bool status);
 };
 
 #endif // SETTINGS_H

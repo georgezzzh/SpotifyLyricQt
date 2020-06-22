@@ -36,6 +36,7 @@ Settings::Settings(SetStruct* setStruct,QWidget *parent) : QWidget(parent),ui(ne
     connect(ui->labelDesktopLrc,&MyLabel::clicked,[=](){
         ui->stackedWidget->setCurrentIndex(3);
     });
+    connect(ui->lrcStatus,SIGNAL(appleClick(bool)),this,SLOT(dealAppleBtnLrc(bool)));
     //更新字体展示
     connect(ui->lineEditFontSize,SIGNAL(textChanged(QString)),this,SLOT(dealFontSize(QString)));
     connect(ui->fontComboBox,SIGNAL(currentFontChanged(QFont)),this,SLOT(dealFontFamily(QFont)));
@@ -96,9 +97,10 @@ void Settings::resetCombox()
         ui->comboBoxOri->setCurrentIndex(1);
     }
     if(setStruct->deskLrcStatus == "on"){
-        ui->radioButtonLrcStatus->setChecked(true);
+        //ui->lrcStatus
+        ui->lrcStatus->setCheck(true);
     }else{
-        ui->radioButtonLrcStatus->setChecked(false);
+        ui->lrcStatus->setCheck(false);
     }
 }
 void Settings::changeSet()
@@ -143,7 +145,12 @@ void Settings::dealFontSize(QString str)
     setStruct->fontSize = str;
     changeSet();
 }
-
+void Settings::dealAppleBtnLrc(bool status)
+{
+    qDebug()<<"status:"<<status;
+    setStruct->deskLrcStatus = status?"on":"off";
+    changeSet();
+}
 void Settings::on_comboBoxLang_currentIndexChanged(int index)
 {
     if(index==0){
@@ -182,12 +189,5 @@ void Settings::on_comboBoxOri_currentIndexChanged(int index)
     changeSet();
 }
 
-void Settings::on_radioButtonLrcStatus_clicked(bool checked)
-{
-    if(checked){
-        setStruct->deskLrcStatus = "on";
-    }else{
-        setStruct->deskLrcStatus = "off";
-    }
-    changeSet();
-}
+
+

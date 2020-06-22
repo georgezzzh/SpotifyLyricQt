@@ -26,6 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    applebutton.cpp \
     client.cpp \
     desklyric.cpp \
     main.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
     spotify.cpp
 
 HEADERS += \
+    applebutton.h \
     client.h \
     desklyric.h \
     mainwindow.h \
