@@ -24,9 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_QuitOnClose,true);
-    //加载翻译文件
-    this->trans = new QTranslator(this);
-    qApp->installTranslator(trans);
+
     //进度条
     QString sss="QSlider::add-page:Horizontal{background-color: rgb(87, 97, 106);height:4px;}";
     sss += "QSlider::sub-page:Horizontal{height:4px;background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(231,80,229, 255), stop:1 rgba(7,208,255, 255));}";
@@ -83,6 +81,8 @@ MainWindow::MainWindow(QWidget *parent)
     this->setStruct = new SetStruct();
     //Setting函数初始化setStruct
     set = new Settings(this->setStruct);
+    set->setWindowTitle("Settings");
+    set->setWindowIcon(QIcon("://icon/set.ico"));
     //读取setStruct内容,langInit初始化语言,configChange加载其他设置
     langInit();
     configChange();
@@ -348,11 +348,16 @@ void MainWindow::configChange()
 }
 void MainWindow::langInit()
 {
+
     QLocale local;
+    //加载翻译文件
+    this->trans = new QTranslator(this);
+    qApp->installTranslator(trans);
     if(setStruct->lang == "简体中文"||(setStruct->lang=="" && local.language()==QLocale::Chinese)){
         trans->load("tr/Translation_CN.qm");
     }else{
         trans->load("tr/Translation_EN.qm");
         ui->retranslateUi(this);
     }
+
 }

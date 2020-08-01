@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>AppleButton</name>
+    <message>
+        <location filename="applebutton.cpp" line="41"/>
+        <source>开启</source>
+        <translation type="unfinished">开启</translation>
+    </message>
+    <message>
+        <location filename="applebutton.cpp" line="46"/>
+        <source>关闭</source>
+        <translation type="unfinished">关闭</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.ui" line="14"/>
@@ -19,52 +32,82 @@
         <translation type="unfinished">0:00</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="47"/>
+        <location filename="mainwindow.ui" line="60"/>
         <source>&lt;&lt;</source>
         <translation type="unfinished">&lt;&lt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="54"/>
+        <location filename="mainwindow.ui" line="80"/>
         <source>&gt;&gt;</source>
         <translation type="unfinished">&gt;&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="73"/>
+        <location filename="mainwindow.ui" line="100"/>
+        <source>误</source>
+        <translation type="unfinished">误</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="120"/>
+        <source>词</source>
+        <translation type="unfinished">词</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="139"/>
         <source>选项</source>
         <translation type="unfinished">选项</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="80"/>
+        <location filename="mainwindow.ui" line="146"/>
         <source>关于</source>
         <translation type="unfinished">关于</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="90"/>
+        <location filename="mainwindow.ui" line="156"/>
         <source>设置</source>
         <translation type="unfinished">设置</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="95"/>
+        <location filename="mainwindow.ui" line="161"/>
         <source>导出歌词</source>
         <translation type="unfinished">导出歌词</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="100"/>
+        <location filename="mainwindow.ui" line="166"/>
         <source>关于本项目</source>
         <translation type="unfinished">关于本项目</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="204"/>
+        <location filename="mainwindow.cpp" line="61"/>
+        <source>歌词前进</source>
+        <translation type="unfinished">歌词前进</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="67"/>
+        <source>歌词后退</source>
+        <translation type="unfinished">歌词后退</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="97"/>
+        <source>桌面歌词</source>
+        <translation type="unfinished">桌面歌词</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="108"/>
+        <source>歌词有误</source>
+        <translation type="unfinished">歌词有误</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="235"/>
         <source>未找到Spotify进程</source>
         <translation type="unfinished">未能找到Spotify进程</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="206"/>
+        <location filename="mainwindow.cpp" line="237"/>
         <source>未能获取到播放的歌目</source>
         <translation type="unfinished">未能获取到播放的曲目</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="255"/>
+        <location filename="mainwindow.cpp" line="288"/>
         <source>服务端未查到该歌词或其他未知错误</source>
         <translation type="unfinished">服务端未查到该歌词或其他未知错误</translation>
     </message>
@@ -85,7 +128,7 @@
         <location filename="settings.ui" line="51"/>
         <source>20</source>
         <oldsource>15</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">20</translation>
     </message>
     <message>
         <location filename="settings.ui" line="62"/>
@@ -97,9 +140,15 @@
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt;&quot;&gt;This paragrah for testing.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt;&quot;&gt;这段文字测试设置&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <oldsource>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;SimSun&apos;;&quot;&gt;This paragrah for testing.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;SimSun&apos;;&quot;&gt;这段文字测试设置&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;SimSun&apos;;&quot;&gt;这段文字测试设置&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -119,7 +168,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="settings.ui" line="136"/>
-        <source>重启生效</source>
+        <source>修改语言重启生效</source>
+        <oldsource>重启生效</oldsource>
         <translation type="unfinished">重启生效</translation>
     </message>
     <message>
@@ -138,42 +188,51 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">白色</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="180"/>
-        <source>开启</source>
-        <translation type="unfinished">开启</translation>
+        <location filename="settings.ui" line="182"/>
+        <source>状态</source>
+        <translation type="unfinished">状态</translation>
     </message>
     <message>
         <location filename="settings.ui" line="189"/>
+        <source>PushButton</source>
+        <translation type="unfinished">按钮</translation>
+    </message>
+    <message>
+        <source>开启</source>
+        <translation type="obsolete">开启</translation>
+    </message>
+    <message>
+        <location filename="settings.ui" line="200"/>
         <source>显示方式</source>
         <translation type="unfinished">显示方式</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="197"/>
+        <location filename="settings.ui" line="208"/>
         <source>横向</source>
         <translation type="unfinished">横向</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="202"/>
+        <location filename="settings.ui" line="213"/>
         <source>纵向</source>
         <translation type="unfinished">纵向</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="234"/>
+        <location filename="settings.ui" line="245"/>
         <source>显示</source>
         <translation type="unfinished">显示</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="248"/>
+        <location filename="settings.ui" line="259"/>
         <source>语言</source>
         <translation type="unfinished">语言</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="262"/>
+        <location filename="settings.ui" line="273"/>
         <source>背景</source>
         <translation type="unfinished">背景</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="276"/>
+        <location filename="settings.ui" line="287"/>
         <source>桌面歌词</source>
         <translation type="unfinished">桌面歌词</translation>
     </message>

@@ -89,7 +89,7 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_2">
+      <widget class="QWidget" name="page_1">
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
@@ -133,11 +133,11 @@ p, li { white-space: pre-wrap; }
          </rect>
         </property>
         <property name="text">
-         <string>重启生效</string>
+         <string>修改语言重启生效</string>
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="page_5">
+      <widget class="QWidget" name="page_2">
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
@@ -175,11 +175,22 @@ p, li { white-space: pre-wrap; }
       <widget class="QWidget" name="page_3">
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="AppleButton" name="lrcStatus">
-          <property name="text">
-           <string>PushButton</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>状态</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="AppleButton" name="lrcStatus">
+            <property name="text">
+             <string>PushButton</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -292,6 +303,9 @@ p, li { white-space: pre-wrap; }
     <enum>Qt::Vertical</enum>
    </property>
   </widget>
+  <zorder>frame</zorder>
+  <zorder>line_3</zorder>
+  <zorder>widget_2</zorder>
  </widget>
  <customwidgets>
   <customwidget>

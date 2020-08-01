@@ -12,8 +12,7 @@ Settings::Settings(SetStruct* setStruct,QWidget *parent) : QWidget(parent),ui(ne
 {    
     ui->setupUi(this);
     this->setFixedSize(578,414);
-    this->setWindowIcon(QIcon("://icon/set.ico"));
-    this->setWindowTitle("Settings");
+
     this->setAutoFillBackground(true);//必须有这条语句
     this->setStruct = setStruct;
     this->trans = new QTranslator(this);
@@ -36,6 +35,7 @@ Settings::Settings(SetStruct* setStruct,QWidget *parent) : QWidget(parent),ui(ne
     connect(ui->labelDesktopLrc,&MyLabel::clicked,[=](){
         ui->stackedWidget->setCurrentIndex(3);
     });
+    ui->stackedWidget->setCurrentIndex(0);
     connect(ui->lrcStatus,SIGNAL(appleClick(bool)),this,SLOT(dealAppleBtnLrc(bool)));
     //更新字体展示
     connect(ui->lineEditFontSize,SIGNAL(textChanged(QString)),this,SLOT(dealFontSize(QString)));
@@ -66,9 +66,9 @@ void Settings::initConfigFile()
     QString fontSize = jsonObject.value("fontSize").toString();
     QString fontFamily = jsonObject.value("fontFamily").toString();
     QString bgColor = jsonObject.value("bgColor").toString();
-    this->setStruct->setAttributes(bgColor,fontFamily,fontSize,lang);
     QString deskLrcOri = jsonObject.value("deskLrcOri").toString();
     QString deskLrcStatus = jsonObject.value("deskLrcStatus").toString();
+    this->setStruct->setAttributes(bgColor,fontFamily,fontSize,lang);
     setStruct->setDeskLrc(deskLrcStatus,deskLrcOri);
     if(lang =="简体中文"){
         trans->load("tr/Translation_CN.qm");
