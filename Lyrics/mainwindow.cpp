@@ -354,9 +354,9 @@ void MainWindow::langInit()
     this->trans = new QTranslator(this);
     qApp->installTranslator(trans);
     if(setStruct->lang == "简体中文"||(setStruct->lang=="" && local.language()==QLocale::Chinese)){
-        trans->load("tr/Translation_CN.qm");
+        trans->load("/opt/SpotifyLyricQt/tr/Translation_CN.qm");
     }else{
-        trans->load("tr/Translation_EN.qm");
+        trans->load("/opt/SpotifyLyricQt/tr/Translation_EN.qm");
         ui->retranslateUi(this);
     }
 
