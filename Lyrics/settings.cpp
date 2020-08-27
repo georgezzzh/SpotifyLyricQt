@@ -71,9 +71,9 @@ void Settings::initConfigFile()
     this->setStruct->setAttributes(bgColor,fontFamily,fontSize,lang);
     setStruct->setDeskLrc(deskLrcStatus,deskLrcOri);
     if(lang =="简体中文"){
-        trans->load("tr/Translation_CN.qm");
+        trans->load("/opt/SpotifyLyricQt/tr/Translation_CN.qm");
     }else if(lang == "English"){
-        trans->load("tr/Translation_EN.qm");
+        trans->load("/opt/SpotifyLyricQt/tr/Translation_EN.qm");
     }
     ui->retranslateUi(this);
 
