@@ -344,11 +344,16 @@ void MainWindow::configChange()
         this->deskLyric->show();
         ui->desklyricFlag->setStyleSheet("QLabel{color:#1DB954;}QLabel:hover{color:#1DB954;}");
     }
-
+    //update set page
+    cout<<"set change mainwindow";
+    setStruct->writeConfigFile();
+    //reset set UI
+    this->set->resetCombox();
+    //update lyric
+    this->resetLyricDisplay();
 }
 void MainWindow::langInit()
 {
-
     QLocale local;
     //加载翻译文件
     this->trans = new QTranslator(this);

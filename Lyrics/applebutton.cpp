@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QEvent>
 #include <QMouseEvent>
+#include "setstruct.h"
 void AppleButton::paintEvent(QPaintEvent* ev)
 {
     QPainter* painter=new QPainter(this);
@@ -35,15 +36,16 @@ void AppleButton::paintEvent(QPaintEvent* ev)
    int m_space = 3; //george added
    QColor m_textColor = QColor("white");
    int sliderWidth = qMin(height(), width()) - m_space * 2 - 5;
+   cout<<"current mcheck,"<<m_checked<<",mode"<<mode;
    if (m_checked){
        QRect textRect(0, 0, width() - sliderWidth, height());
        painter->setPen(QPen(m_textColor));
-       QString m_textOn = tr("开启");
+       QString m_textOn =this->m_textOn;
        painter->drawText(textRect, Qt::AlignCenter, m_textOn);
    } else {
        QRect textRect(sliderWidth, 0, width() - sliderWidth, height());
        painter->setPen(QPen(m_textColor));
-       QString m_textOff = tr("关闭");
+       QString m_textOff = this->m_textOff;
        painter->drawText(textRect, Qt::AlignCenter, m_textOff);
    }
    drawSlider();
@@ -66,12 +68,27 @@ void AppleButton::drawSlider()
 void AppleButton::mousePressEvent(QMouseEvent* ev)
 {
     m_checked = !m_checked;
+    cout<<"clicked,"<<this->mode;
+    if(this->mode==MODE::LRC_BTN){
+        emit deskLrcBtnClick(m_checked);
+    }else if(this->mode==MODE::BG_COLOR_BTN){
+        emit bgColorBtnClick(m_checked);
+    }
     this->update();
-    emit appleClick(m_checked);
+
 }
-AppleButton::AppleButton(QWidget *parent) : QPushButton(parent)
+AppleButton::AppleButton(MODE mode,QWidget *parent) : QPushButton(parent)
 {
     qDebug()<<"appleMock pushbutton";
+    this->mode = mode;
+    this->m_checked = false;
+    this->m_textOn=QString("On");
+    this->m_textOff=QString("Off");
+    SetStruct set;
+    if(set.lang=="English"){
+        this->m_textOn=QString("On");
+        this->m_textOff=QString("Off");
+    }
     this->setFixedSize(80,30);
     this->update();
 }

@@ -27,26 +27,32 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     applebutton.cpp \
+    bgcolor_btn.cpp \
     client.cpp \
     desklyric.cpp \
+    lrc_button.cpp \
     main.cpp \
     mainwindow.cpp \
     mylabel.cpp \
     mytextbrowser.cpp \
     neteasecloudmusicclient.cpp \
     qqmusicclient.cpp \
+    setstruct.cpp \
     settings.cpp \
     spotify.cpp
 
 HEADERS += \
     applebutton.h \
+    bgcolor_btn.h \
     client.h \
     desklyric.h \
+    lrc_button.h \
     mainwindow.h \
     mylabel.h \
     mytextbrowser.h \
     neteasecloudmusicclient.h \
     qqmusicclient.h \
+    setstruct.h \
     settings.h \
     spotify.h
 

@@ -3,50 +3,25 @@
 
 #include <QWidget>
 #include <QTranslator>
+#include "setstruct.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class Settings; }
 QT_END_NAMESPACE
 #define cout qDebug().noquote()<<"["<<__FILE__<<":"<<__LINE__<<"]: "
-class SetStruct{
-public:
-  QString bgColor;
-  QString fontFamily;
-  QString fontSize;
-  QString lang;
-  QString deskLrcStatus;
-  QString deskLrcOri;
-  //语言不设置预置项
-  SetStruct(QString bgColor="white",QString fontFamily="Arial",
-            QString fontSize="20",QString lang="")  {
-      this->bgColor = bgColor;
-      this->fontFamily = fontFamily;
-      this->fontSize = fontSize;
-      this->lang = lang;
-      this->deskLrcStatus = "off";
-      this->deskLrcOri = "HORIZONTAL";
-  }
-  void setDeskLrc(QString deskLrcStatus = "off",QString deskLrcOri = "HORIZONTAL"){
-      this->deskLrcOri = deskLrcOri;
-      this->deskLrcStatus = deskLrcStatus;
-  }
-  void setAttributes(QString bgColor,QString fontFamily,QString fontSize,QString lang){
-      this->bgColor = bgColor;
-      this->fontFamily = fontFamily;
-      this->fontSize = fontSize;
-      this->lang = lang;
-  }
-};
+
 class Settings : public QWidget
 {
     Q_OBJECT
 public:
     explicit Settings(SetStruct* setStruct,QWidget *parent = nullptr);
-private:
-    void initConfigFile();
-    void resetCombox();
     void changeSet();
+    void resetCombox();
+private:
+    void initConfig();
+
+
     Ui::Settings *ui;
-    QString configName;
+
     SetStruct* setStruct;
     QTranslator* trans;
 signals:
@@ -54,10 +29,10 @@ signals:
 private slots:
     void dealFontSize(QString str);
     void dealFontFamily(QFont font);
-    void on_comboBoxColor_currentIndexChanged(int index);
     void on_comboBoxLang_currentIndexChanged(int index);
     void on_comboBoxOri_currentIndexChanged(int index);
-    void dealAppleBtnLrc(bool status);
+    void dealDeskLrcClick(bool status);
+    void dealBgColorClick(bool status);
 };
 
 #endif // SETTINGS_H
