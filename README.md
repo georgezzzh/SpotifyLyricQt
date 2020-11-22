@@ -1,6 +1,6 @@
 # SpotifyLyricQt
 
-<img src="https://github.com/georgezzzh/SpotifyLyricQt/raw/master/Readme/icon.svg" alt="icon" style="zoom:15%;" />
+<img src="https://raw.githubusercontent.com/georgezzzh/SpotifyLyricQt/master/Readme/icon.png" alt="icon"  />
 
 [English README](https://github.com/georgezzzh/SpotifyLyricQt/blob/master/README_EN.md)  
 Windows与Linux皆可运行的Spotify歌词同步软件，下图为Ubuntu20.04实测图。
