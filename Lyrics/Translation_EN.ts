@@ -4,14 +4,12 @@
 <context>
     <name>AppleButton</name>
     <message>
-        <location filename="applebutton.cpp" line="41"/>
         <source>开启</source>
-        <translation type="unfinished">Active</translation>
+        <translation type="obsolete">Active</translation>
     </message>
     <message>
-        <location filename="applebutton.cpp" line="46"/>
         <source>关闭</source>
-        <translation type="unfinished">Stop</translation>
+        <translation type="obsolete">Stop</translation>
     </message>
 </context>
 <context>
@@ -87,27 +85,27 @@
         <translation type="unfinished">back lyric</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="97"/>
+        <location filename="mainwindow.cpp" line="94"/>
         <source>桌面歌词</source>
         <translation type="unfinished">Desktop lrc</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="108"/>
+        <location filename="mainwindow.cpp" line="105"/>
         <source>歌词有误</source>
         <translation type="unfinished">lyric error</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="235"/>
+        <location filename="mainwindow.cpp" line="232"/>
         <source>未找到Spotify进程</source>
         <translation type="unfinished">Failed to find out Spotify progress</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="237"/>
+        <location filename="mainwindow.cpp" line="234"/>
         <source>未能获取到播放的歌目</source>
         <translation type="unfinished">Failed to get song that&apos;s playing</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="288"/>
+        <location filename="mainwindow.cpp" line="285"/>
         <source>服务端未查到该歌词或其他未知错误</source>
         <translation type="unfinished">Server doesn&apos;t have this lyric or some unknown error</translation>
     </message>
@@ -152,48 +150,48 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settings.ui" line="106"/>
+        <location filename="settings.ui" line="119"/>
         <source>显示语言</source>
         <translation type="unfinished">Language</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="114"/>
+        <location filename="settings.ui" line="127"/>
         <source>简体中文</source>
         <translation type="unfinished">简体中文</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="119"/>
+        <location filename="settings.ui" line="132"/>
         <source>English</source>
         <translation type="unfinished">English</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="136"/>
+        <location filename="settings.ui" line="103"/>
         <source>修改语言重启生效</source>
         <oldsource>重启生效</oldsource>
         <translation type="unfinished">Restart to active</translation>
     </message>
     <message>
         <location filename="settings.ui" line="154"/>
-        <source>背景颜色</source>
-        <translation type="unfinished">Color</translation>
+        <source>深色模式</source>
+        <oldsource>背景颜色</oldsource>
+        <translation type="unfinished">Dark Mode</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="162"/>
         <source>黑色</source>
-        <translation type="unfinished">dark</translation>
+        <translation type="obsolete">dark</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="167"/>
         <source>白色</source>
-        <translation type="unfinished">white</translation>
+        <translation type="obsolete">white</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="182"/>
+        <location filename="settings.ui" line="175"/>
         <source>状态</source>
         <translation type="unfinished">Status</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="189"/>
+        <location filename="settings.ui" line="161"/>
+        <location filename="settings.ui" line="182"/>
         <source>PushButton</source>
         <translation type="unfinished">Button</translation>
     </message>
@@ -202,37 +200,37 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Active</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="200"/>
+        <location filename="settings.ui" line="193"/>
         <source>显示方式</source>
         <translation type="unfinished">lrc orientation</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="208"/>
+        <location filename="settings.ui" line="201"/>
         <source>横向</source>
         <translation type="unfinished">Horizontal</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="213"/>
+        <location filename="settings.ui" line="206"/>
         <source>纵向</source>
         <translation type="unfinished">Vertical</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="245"/>
+        <location filename="settings.ui" line="238"/>
         <source>显示</source>
         <translation type="unfinished">Display</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="259"/>
+        <location filename="settings.ui" line="252"/>
         <source>语言</source>
         <translation type="unfinished">Language</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="273"/>
+        <location filename="settings.ui" line="266"/>
         <source>背景</source>
         <translation type="unfinished">Background</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="287"/>
+        <location filename="settings.ui" line="280"/>
         <source>桌面歌词</source>
         <translation type="unfinished">Desktop lrc</translation>
     </message>

@@ -4,14 +4,12 @@
 <context>
     <name>AppleButton</name>
     <message>
-        <location filename="applebutton.cpp" line="41"/>
         <source>开启</source>
-        <translation type="unfinished">开启</translation>
+        <translation type="obsolete">开启</translation>
     </message>
     <message>
-        <location filename="applebutton.cpp" line="46"/>
         <source>关闭</source>
-        <translation type="unfinished">关闭</translation>
+        <translation type="obsolete">关闭</translation>
     </message>
 </context>
 <context>
@@ -87,27 +85,27 @@
         <translation type="unfinished">歌词后退</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="97"/>
+        <location filename="mainwindow.cpp" line="94"/>
         <source>桌面歌词</source>
         <translation type="unfinished">桌面歌词</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="108"/>
+        <location filename="mainwindow.cpp" line="105"/>
         <source>歌词有误</source>
         <translation type="unfinished">歌词有误</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="235"/>
+        <location filename="mainwindow.cpp" line="232"/>
         <source>未找到Spotify进程</source>
         <translation type="unfinished">未能找到Spotify进程</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="237"/>
+        <location filename="mainwindow.cpp" line="234"/>
         <source>未能获取到播放的歌目</source>
         <translation type="unfinished">未能获取到播放的曲目</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="288"/>
+        <location filename="mainwindow.cpp" line="285"/>
         <source>服务端未查到该歌词或其他未知错误</source>
         <translation type="unfinished">服务端未查到该歌词或其他未知错误</translation>
     </message>
@@ -152,48 +150,48 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settings.ui" line="106"/>
+        <location filename="settings.ui" line="119"/>
         <source>显示语言</source>
         <translation type="unfinished">显示语言</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="114"/>
+        <location filename="settings.ui" line="127"/>
         <source>简体中文</source>
         <translation type="unfinished">简体中文</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="119"/>
+        <location filename="settings.ui" line="132"/>
         <source>English</source>
         <translation type="unfinished">English</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="136"/>
+        <location filename="settings.ui" line="103"/>
         <source>修改语言重启生效</source>
         <oldsource>重启生效</oldsource>
         <translation type="unfinished">重启生效</translation>
     </message>
     <message>
         <location filename="settings.ui" line="154"/>
-        <source>背景颜色</source>
-        <translation type="unfinished">背景颜色</translation>
+        <source>深色模式</source>
+        <oldsource>背景颜色</oldsource>
+        <translation type="unfinished">深色模式</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="162"/>
         <source>黑色</source>
-        <translation type="unfinished">黑色</translation>
+        <translation type="obsolete">黑色</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="167"/>
         <source>白色</source>
-        <translation type="unfinished">白色</translation>
+        <translation type="obsolete">白色</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="182"/>
+        <location filename="settings.ui" line="175"/>
         <source>状态</source>
         <translation type="unfinished">状态</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="189"/>
+        <location filename="settings.ui" line="161"/>
+        <location filename="settings.ui" line="182"/>
         <source>PushButton</source>
         <translation type="unfinished">按钮</translation>
     </message>
@@ -202,37 +200,37 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">开启</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="200"/>
+        <location filename="settings.ui" line="193"/>
         <source>显示方式</source>
         <translation type="unfinished">显示方式</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="208"/>
+        <location filename="settings.ui" line="201"/>
         <source>横向</source>
         <translation type="unfinished">横向</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="213"/>
+        <location filename="settings.ui" line="206"/>
         <source>纵向</source>
         <translation type="unfinished">纵向</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="245"/>
+        <location filename="settings.ui" line="238"/>
         <source>显示</source>
         <translation type="unfinished">显示</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="259"/>
+        <location filename="settings.ui" line="252"/>
         <source>语言</source>
         <translation type="unfinished">语言</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="273"/>
+        <location filename="settings.ui" line="266"/>
         <source>背景</source>
         <translation type="unfinished">背景</translation>
     </message>
     <message>
-        <location filename="settings.ui" line="287"/>
+        <location filename="settings.ui" line="280"/>
         <source>桌面歌词</source>
         <translation type="unfinished">桌面歌词</translation>
     </message>
