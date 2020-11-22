@@ -359,10 +359,17 @@ void MainWindow::langInit()
     this->trans = new QTranslator(this);
     qApp->installTranslator(trans);
     if(setStruct->lang == "简体中文"||(setStruct->lang=="" && local.language()==QLocale::Chinese)){
-        trans->load("/opt/SpotifyLyricQt/tr/Translation_CN.qm");
+        #if defined(WIN32)
+            trans->load("tr/Translation_CN.qm");
+        #else
+            trans->load("/opt/SpotifyLyricQt/tr/Translation_CN.qm");
+        #endif
     }else{
-        trans->load("/opt/SpotifyLyricQt/tr/Translation_EN.qm");
+        #if defined(WIN32)
+               trans->load("tr/Translation_EN.qm");
+        #else
+                trans->load("/opt/SpotifyLyricQt/tr/Translation_EN.qm");
+        #endif
         ui->retranslateUi(this);
     }
-
 }
