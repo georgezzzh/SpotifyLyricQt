@@ -26,7 +26,7 @@ void NeteaseCloudMusicClient::sendHttpRequest(QString title,bool forceHttp)
     }
     //无缓冲时进行网络请求
     if(!readBuffer()){
-        QNetworkRequest request = QNetworkRequest(QUrl("http://www.sonydafa.com:3000/search?keywords="+title));
+        QNetworkRequest request = QNetworkRequest(QUrl("http://66.135.1.44:3000/search?keywords="+title));
         networkManager->get(request);
     }
 }
@@ -86,6 +86,6 @@ void NeteaseCloudMusicClient::songidSlot(QNetworkReply *reply)
         return;
     }
     //接收Id成功之后再发送获取歌词的请求
-    QNetworkRequest request = QNetworkRequest(QUrl("http://www.sonydafa.com:3000/lyric?id="+songId));
+    QNetworkRequest request = QNetworkRequest(QUrl("http://66.135.1.44:3000/lyric?id="+songId));
     networkManager2->get(request);
 }
