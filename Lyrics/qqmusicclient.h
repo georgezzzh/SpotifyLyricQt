@@ -10,10 +10,12 @@ class QQMusicClient : public Client
 public:
     explicit QQMusicClient(QObject *parent = nullptr);
     void sendHttpRequest(QString title,bool forceHttp);
+    void requestQQMusicLyric();
 private:
     QNetworkAccessManager* networkManager;
     QNetworkAccessManager* networkManager2;
-    QString parseSongId(QString doc);
+    QStringList songMidList;
+    QStringList parseSongId(QString doc);
     QString parseSongLyrics(QString lyric);
 signals:
 

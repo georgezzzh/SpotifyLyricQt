@@ -1,6 +1,7 @@
 #include "applebutton.h"
 #include <QDebug>
 #include <QPainter>
+#include <QPainterPath>
 #include <QEvent>
 #include <QMouseEvent>
 #include "setstruct.h"

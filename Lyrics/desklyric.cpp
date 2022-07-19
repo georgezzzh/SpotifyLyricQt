@@ -4,6 +4,7 @@
 #include <QDesktopWidget>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QPainterPath>
 #include <QDebug>
 #include <QThread>
 #include <QDateTime>
